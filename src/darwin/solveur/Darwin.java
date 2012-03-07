@@ -59,7 +59,8 @@ public class Darwin implements IDarwin {
 		System.out.println("*****          Population initiale :            *****");
 		System.out.println("-----------------------------------------------------" + "\n");
 		
-		System.out.println(this.getSelectionNaturelle().getPopulation() + "\n" + "\n");
+		System.out.println(this.getSelectionNaturelle().getPopulation()+ "\n" + "Score : " +
+					this.getSelectionNaturelle().getPopulation().evaluerPopulation() + "\n" + "\n");
 		
 		System.out.println("-----------------------------------------------------");
 		System.out.println("*****   Demarrage de l'algorithme génétique     *****");

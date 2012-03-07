@@ -24,12 +24,18 @@ public abstract class Population implements IPopulation {
 	protected IEnvironnement environnement;
 	
 	/**
+	 * Constructeur par défaut
+	 */
+	protected Population(){
+	}
+	
+	/**
 	 * Constructeur basique
 	 * @param nombreIndividusTheorique
 	 * @param environnement
 	 */
-	protected Population(int nombreIndividusTheorique, IEnvironnement environnement){
-		this.nombreIndividusSouhaite = nombreIndividusTheorique;
+	protected Population(int nombreIndividusSouhaites, IEnvironnement environnement){
+		this.nombreIndividusSouhaite = nombreIndividusSouhaites;
 		this.environnement = environnement;
 		this.generer();
 	}
@@ -100,7 +106,7 @@ public abstract class Population implements IPopulation {
 	public IIndividu getBestIndividu(){
 		IIndividu retour = this.getIndividu(0);
 		for(int i=1; i<this.getTailleEffective(); i++){
-			if(this.evaluerIndividu(retour) < this.evaluerIndividu(i)){
+			if(this.evaluerIndividu(retour) < this.evaluerIndividu(this.getIndividu(i))){
 				retour = this.getIndividu(i);
 			}
 		}

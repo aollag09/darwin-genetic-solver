@@ -12,6 +12,13 @@ import darwin.modele.Mutation;
  */
 public class MutationSimple extends Mutation{
 
+	// VARIABLES D'INSTANCE
+	/**
+	 * le nombre de bits à muter dans une caractéristique
+	 */
+	protected int nbBitAMuter;
+	
+	
 	// CONSTANTES
 	/**
 	 * Le nombre de bits à muter par défaut
@@ -28,7 +35,8 @@ public class MutationSimple extends Mutation{
 	 * @throws Exception
 	 */
 	public MutationSimple() throws Exception{
-		super(NOMBRE_BIT_A_MUTER_DEFAUT, PROBABILITE_DEFAUT);
+		super(PROBABILITE_DEFAUT);
+		this.nbBitAMuter = NOMBRE_BIT_A_MUTER_DEFAUT;
 	}
 	
 	/**
@@ -38,7 +46,8 @@ public class MutationSimple extends Mutation{
 	 * @throws Exception
 	 */
 	public MutationSimple(int nbBitAMuter, double prob) throws Exception {
-		super(nbBitAMuter, prob);
+		super(prob);
+		this.nbBitAMuter = nbBitAMuter;
 	}
 
 	@Override
@@ -74,6 +83,10 @@ public class MutationSimple extends Mutation{
 			
 		}
 		return retour;
+	}
+
+	public boolean mutationCaracteristiquePossible(ICaracteristique caracteristique){
+		return (caracteristique.getTailleBitSet() > nbBitAMuter);
 	}
 
 }

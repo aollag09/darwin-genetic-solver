@@ -18,6 +18,13 @@ public abstract class CrossOver implements ICrossOver {
 	protected double probabilite;
 	
 	/**
+	 * Constructeur par défaut
+	 */
+	protected CrossOver(){
+		probabilite = 0.7;
+	}
+	
+	/**
 	 * Constructeur basique
 	 * @param nbCaracs Le nombre de caractères à interchanger
 	 * @param probabilite La probabilité pour que le crossOver ait lieu (entre 0 et 1)

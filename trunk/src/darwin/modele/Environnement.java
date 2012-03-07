@@ -15,6 +15,12 @@ public abstract class Environnement implements IEnvironnement{
 	protected String name;
 	
 	/**
+	 * Constructeur par défaut
+	 */
+	protected Environnement(){
+	}
+	
+	/**
 	 * Constructeur basique
 	 * @param name
 	 */

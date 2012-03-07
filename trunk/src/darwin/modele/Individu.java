@@ -1,5 +1,6 @@
 package darwin.modele;
 
+import java.util.ArrayList;
 import java.util.List;
 import darwin.interfaces.ICaracteristique;
 import darwin.interfaces.IIndividu;
@@ -21,6 +22,13 @@ public abstract class Individu implements IIndividu {
 	/** La liste des caractéristiques de l'individu */
 	protected List<ICaracteristique> caracteristiques;
 	
+	
+	/**
+	 * Constructeur par défaut
+	 */
+	protected Individu(){
+	}
+	
 	/**
 	 * Construteur basique 
 	 * @param name
@@ -30,6 +38,19 @@ public abstract class Individu implements IIndividu {
 		this.type = -1;
 		this.name = name;
 		this.caracteristiques = caracteristiques;
+	}
+	
+	/**
+	 * Constructeur par recopie (pour le clone() ).
+	 * @param i
+	 */
+	protected Individu(Individu i){
+		this.type = i.getType();
+		this.name = new String(i.getName());
+		this.caracteristiques = new ArrayList<ICaracteristique>();
+		for(ICaracteristique c : i.getListCaracteristique()){
+			this.caracteristiques.add(c.clone());
+		}
 	}
 	
 	@Override

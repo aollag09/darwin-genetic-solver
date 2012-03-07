@@ -19,6 +19,12 @@ public abstract class Selection implements ISelection {
 	protected int nbIndivus;
 	
 	/**
+	 * Constructeur par défaut
+	 */
+	protected Selection(){		
+	}
+	
+	/**
 	 * Constructeur basique
 	 * @param nbIndividus Le nombre d'individus à selectionner
 	 * @throws Exception Si ce nombre < 1

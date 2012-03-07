@@ -22,6 +22,12 @@ public abstract class Caracteristique implements ICaracteristique {
 	protected String nom;
 	
 	/**
+	 * Constructeur par défaut
+	 */
+	protected Caracteristique(){
+	}
+	
+	/**
 	 * Constructeur basique
 	 * @param nom
 	 * @param bitSet
@@ -31,6 +37,16 @@ public abstract class Caracteristique implements ICaracteristique {
 		this.tailleBitSet = tailleBitSet;
 		this.bitSet = bitSet;
 		this.nom = nom;
+	}
+	
+	/**
+	 * Constructeur par recopie (pour le clone() )
+	 * @param c
+	 */
+	protected Caracteristique(Caracteristique c){
+		this.nom = new String(c.getName());
+		this.bitSet = (BitSet) c.getBitSet().clone();
+		this.tailleBitSet = c.tailleBitSet;
 	}
 	
 	@Override

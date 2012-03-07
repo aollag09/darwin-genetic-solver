@@ -11,19 +11,20 @@ import darwin.interfaces.IMutation;
 public abstract class Mutation implements IMutation{
 	
 	// VARIABLES D'INSTANCE
-	
-	/**
-	 * le nombre de bits à muter dans une caractéristique
-	 */
-	protected int nbBitAMuter;
-	
+
 	/**
 	 * La probablité que la mutation ait lieu (comprit entre 0 et 1)
 	 */
 	protected double probabilite;
 	
-	protected Mutation(int nbBitAMuter, double prob) throws Exception{
-		this.nbBitAMuter = nbBitAMuter;
+	/**
+	 * Constructeur par défaut
+	 */
+	protected Mutation(){
+		this.probabilite = 0.01;
+	}
+	
+	protected Mutation(double prob) throws Exception{
 		if(prob<0 || prob>1){
 			System.out.println("Probabilité de mutation non comprise entre 0 et 1");
 			throw new Exception();
@@ -44,9 +45,7 @@ public abstract class Mutation implements IMutation{
 	 * @param caracteristique
 	 * @return true si la caractéristique contient plus de bits que de bits à muter
 	 */
-	public boolean mutationCaracteristiquePossible(ICaracteristique caracteristique){
-		return (caracteristique.getTailleBitSet() > nbBitAMuter);
-	}
+	public abstract boolean mutationCaracteristiquePossible(ICaracteristique caracteristique);
 	
 	/**
 	 * 

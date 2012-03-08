@@ -22,12 +22,13 @@ public class EnvironnementTuples extends Environnement{
 			for(int i=0; i<t.getNbEntiers(); i++){
 				Entier e = (Entier)t.getListCaracteristique().get(i);
 				double d = e.getValeur();
-				if(objectif[i] == d){
-					score += 2;
-				}
-				else{
-					score += 1/(Math.abs(objectif[i]-d));
-				}	
+				score += (d-objectif[i])*(d-objectif[i]);	
+			}
+			if(score == 0){
+				score = 100;
+			}
+			else{
+				score = 1/(Math.sqrt(score));
 			}
 		}
 		return score;

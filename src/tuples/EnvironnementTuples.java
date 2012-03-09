@@ -25,7 +25,7 @@ public class EnvironnementTuples extends Environnement{
 				score += (d-objectif[i])*(d-objectif[i]);	
 			}
 			if(score == 0){
-				score = 100;
+				score = 2;
 			}
 			else{
 				score = 1/(Math.sqrt(score));

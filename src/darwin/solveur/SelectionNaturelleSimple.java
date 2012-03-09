@@ -12,8 +12,8 @@ import darwin.modele.SelectionNaturelle;
 import darwin.solveur.crossovers.CrossOverSimple;
 import darwin.solveur.mutations.MutationSimple;
 import darwin.solveur.selections.SelectionElitiste;
-import darwin.solveur.selections.SelectionRoulette;
 import darwin.solveur.selections.SelectionTirageAleatoire;
+import darwin.solveur.selections.SelectionTournoi;
 
 /**
  * Selection naturelle standard : On selectionne m(<=taille de la population) individus, qu'on croise puis mute,
@@ -33,6 +33,11 @@ public class SelectionNaturelleSimple extends SelectionNaturelle{
 	protected int nombreCouples;
 	
 	/**
+	 * La probabité d'apparition d'individus completement nouveaux, doit être comprise entre 0 et 1
+	 */
+	protected double probImmigration;
+	
+	/**
 	 * Constructeur avec types de selection, crossOver et Mutation prédéfinis
 	 * @param pop La population sur laquelle effectuer la selection Naturelle
 	 * @param nbIndividusSelInit Le nombre d'individus à choisir lors de la premiere selection
@@ -40,20 +45,14 @@ public class SelectionNaturelleSimple extends SelectionNaturelle{
 	 * @param pCross La probabilité de crossOver
 	 * @param nbBitMut Le nombre de bits à muter lors de la mutation 
 	 * @param pMut La probabilité de mutation
-	 * @param nbCouples
+	 * @param nbCouples Le nombre de couples à former lors du crossOver
+	 * @param probIm La probabilité d'immigration
 	 * @throws Exception
 	 */
 	public SelectionNaturelleSimple(IPopulation pop, int nbIndividusSelInit,
-			int nbCaracCross, double pCross, int nbBitMut, double pMut, int nbCouples) throws Exception{
-		super(new SelectionRoulette(nbIndividusSelInit), new SelectionElitiste(pop.getTailleSouhaitee()),
-				new CrossOverSimple(nbCaracCross, pCross), new MutationSimple(nbBitMut, pMut), pop);
-		if(nbCouples < 0){
-			System.out.println("Nombre de couples indiqué < 0");
-			throw new Exception();
-		}
-		else{
-			this.nombreCouples = nbCouples;
-		}	
+			int nbCaracCross, double pCross, int nbBitMut, double pMut, int nbCouples, double probIm) throws Exception{
+		this(new SelectionTournoi(nbIndividusSelInit), new SelectionTournoi(pop.getTailleSouhaitee()),
+				new CrossOverSimple(nbCaracCross, pCross), new MutationSimple(nbBitMut, pMut), pop, nbCouples, probIm);
 	}
 	
 	/**
@@ -64,11 +63,25 @@ public class SelectionNaturelleSimple extends SelectionNaturelle{
 	 * @param mut La mutation
 	 * @param pop La population
 	 * @param nbCouples Le nombre de couples
+	 * @param probImmigration La probabilité d'immigration
 	 */
 	public SelectionNaturelleSimple(ISelection selInit, ISelection selFin,
-			ICrossOver cross, IMutation mut, IPopulation pop, int nbCouples) {
+			ICrossOver cross, IMutation mut, IPopulation pop, int nbCouples, double probImmigration) throws Exception{
 		super(selInit, selFin, cross, mut, pop);
-		this.nombreCouples = nbCouples;
+		if(nbCouples < 0){
+			System.out.println("Nombre de couples indiqué < 0");
+			throw new Exception();
+		}
+		else{
+			this.nombreCouples = nbCouples;
+		}	
+		if(probImmigration<0 || probImmigration>1){
+			System.out.println("Probabilité d'immigration non comprise entre 0 et 1");
+			throw new Exception();
+		}
+		else{
+			this.probImmigration = probImmigration;
+		}	
 	}
 
 	public int getNombreCouples() {
@@ -77,6 +90,33 @@ public class SelectionNaturelleSimple extends SelectionNaturelle{
 	
 	@Override
 	public void nextGeneration() {
+		
+		/* IMMIGRATION */
+		
+		boolean doImmigration = false;
+		if(this.probImmigration == 1){
+			doImmigration = true;
+		}
+		else{
+			double d = Math.random();
+			if(d<probImmigration){
+				doImmigration = true;
+			}
+		}
+		
+		if(doImmigration){
+			List<IIndividu> actuels = new ArrayList<IIndividu>();
+			for(IIndividu i : this.getPopulation().getListIndividus()){
+				actuels.add(i.clone());
+			}
+			this.getPopulation().generer();
+			for(IIndividu i : this.getPopulation().getListIndividus()){
+				i.setName(i.getName() + "-Immigré");
+			}
+			for(IIndividu i : actuels){
+				this.getPopulation().ajouterIndividu(i);
+			}	
+		}
 		
 		/* SELECTION */
 		List<IIndividu> selectionnes = new ArrayList<IIndividu>(this.getSelectionInitiale().selectionner(this.getPopulation()));

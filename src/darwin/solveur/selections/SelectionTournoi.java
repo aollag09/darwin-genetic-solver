@@ -79,6 +79,9 @@ public class SelectionTournoi extends Selection{
 				 * à la liste des individus séléctionnés */
 				individusCourant.add(individus.get(i));
 			}
+			/* On met a jour la liste des selection a retourner */
+			individus.clear();
+			individus.addAll(individusCourant);
 		}
 	}
 	

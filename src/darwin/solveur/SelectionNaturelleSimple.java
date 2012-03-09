@@ -152,10 +152,11 @@ public class SelectionNaturelleSimple extends SelectionNaturelle{
 		}
 		
 		/* AJOUT DANS LA POPULATION */
+		
 		for(IIndividu i : nouveaux){
-			if(this.getPopulation().getListIndividus().contains(i)){
+			if(!this.getPopulation().getListIndividus().contains(i)){
 				this.getPopulation().ajouterIndividu(i);
-			}	
+			}
 		}
 		System.out.println();
 		/* SELECTION */

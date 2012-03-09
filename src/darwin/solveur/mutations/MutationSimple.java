@@ -65,7 +65,7 @@ public class MutationSimple extends Mutation{
 				return nIndividu;
 		}
 		else{
-			return nIndividu;
+			return individu;
 		}
 	}
 	

@@ -69,14 +69,14 @@ public abstract class Caracteristique implements ICaracteristique {
 	
 	public abstract Caracteristique clone();
 	
-	public boolean equals(Object o){
+	/*public boolean equals(Object o){
 		boolean retour = false;
 		if(o instanceof Caracteristique){
 			Caracteristique c = (Caracteristique) o;
 			retour = this.getBitSet().equals(c.getBitSet());
 		}
 		return retour;
-	}
+	}*/
 	
 	/**
 	 * Représentation sous forme de chaine de caractères

@@ -96,8 +96,6 @@ public class SelectionTournoi extends Selection{
 			/* On met a jour la liste des selection a retourner */
 			individusGagnant.clear();
 			individusGagnant.addAll(individusCourant);
-			//TODO
-			System.out.println();
 		}
 	}
 	

@@ -62,8 +62,11 @@ public class MutationSimple extends Mutation{
 		}
 		if(mutant){
 				nIndividu.setName(nIndividu.getName() + "-mutant");
+				return nIndividu;
 		}
-		return nIndividu;
+		else{
+			return nIndividu;
+		}
 	}
 	
 	/**

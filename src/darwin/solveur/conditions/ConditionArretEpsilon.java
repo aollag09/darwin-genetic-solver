@@ -51,6 +51,7 @@ public class ConditionArretEpsilon extends ConditionArret{
 
 	@Override
 	public boolean isSatisfied(IPopulation population) {
+		iterations++;
 		if(oldEvaluation == Double.MIN_VALUE){
 			/* L'ancienne évaluation n'est pas encore instanciée */
 			oldEvaluation = population.evaluerPopulation();

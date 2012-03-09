@@ -47,5 +47,5 @@ public interface ICaracteristique extends Cloneable {
 	 * @param o
 	 * @return true si les deux caracteristiques ont le même bitSet
 	 */
-	boolean equals(Object o);
+	//boolean equals(Object o);
 }

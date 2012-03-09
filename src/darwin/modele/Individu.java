@@ -84,7 +84,7 @@ public abstract class Individu implements IIndividu {
 
 	public abstract Individu clone();
 	
-	public boolean equals(Object o){
+	/*public boolean equals(Object o){
 		boolean retour = false;
 		if(o instanceof Individu){
 			retour = true;
@@ -94,7 +94,7 @@ public abstract class Individu implements IIndividu {
 			}
 		}
 		return retour;
-	}
+	}*/
 	
 	public String toString() {
 		String retour = "Individu " + name + ", caracteristiques = ";

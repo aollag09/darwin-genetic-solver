@@ -51,7 +51,7 @@ public class SelectionNaturelleSimple extends SelectionNaturelle{
 	 */
 	public SelectionNaturelleSimple(IPopulation pop, int nbIndividusSelInit,
 			int nbCaracCross, double pCross, int nbBitMut, double pMut, int nbCouples, double probIm) throws Exception{
-		this(new SelectionTournoi(nbIndividusSelInit), new SelectionTournoi(pop.getTailleSouhaitee()),
+		this(new SelectionTournoi(nbIndividusSelInit), new SelectionElitiste(pop.getTailleSouhaitee()),
 				new CrossOverSimple(nbCaracCross, pCross), new MutationSimple(nbBitMut, pMut), pop, nbCouples, probIm);
 	}
 	
@@ -153,9 +153,9 @@ public class SelectionNaturelleSimple extends SelectionNaturelle{
 		
 		/* AJOUT DANS LA POPULATION */
 		for(IIndividu i : nouveaux){
-			if(!this.getPopulation().getListIndividus().contains(i)){
+			if(this.getPopulation().getListIndividus().contains(i)){
 				this.getPopulation().ajouterIndividu(i);
-			}
+			}	
 		}
 		System.out.println();
 		/* SELECTION */

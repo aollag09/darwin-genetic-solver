@@ -57,5 +57,5 @@ public interface IIndividu extends Cloneable{
 	 * @param o
 	 * @return true si les deux individus ont le même code génétique (ie les mêmes caractéristiques)
 	 */
-	boolean equals(Object o);
+	//boolean equals(Object o);
 }

@@ -15,9 +15,9 @@ public class ResolutionTuples {
 		IPopulation p = new PopulationTuples(20, 5, new int[] {1,2,4,0,15});
 		
 		try {
-			ISelectionNaturelle selec = new SelectionNaturelleSimple(p, 15, 1, 0.7, 1, 0.3, 10, 0.1);
+			ISelectionNaturelle selec = new SelectionNaturelleSimple(p, 15, 1, 0.7, 1, 0.3, 10, 0.2);
 			
-			IConditionArret c = new ConditionArret() {
+			IConditionArret c = /*new ConditionArretEpsilon(0.05);*/new ConditionArret() {
 				
 				int c = 40;
 				double ancienScore = 0;
@@ -45,6 +45,7 @@ public class ResolutionTuples {
 					double d = 	this.ancienScore - population.evaluerPopulation();
 					this.ancienScore = population.evaluerPopulation();
 					return (Math.abs(d)<this.epsilon);
+					//return (population.evaluerPopulation() > 100 || this.iterations>1000);
 				}
 			};
 			

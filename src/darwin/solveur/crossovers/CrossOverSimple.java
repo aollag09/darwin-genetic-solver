@@ -38,7 +38,7 @@ public class CrossOverSimple extends CrossOver{
 		
 		//On initialise la liste à retourner avec les individus inchangés
 		ArrayList<IIndividu> retour = 
-				new ArrayList<IIndividu>(Arrays.asList(new IIndividu[] {individu1.clone(), individu2.clone()}));
+				new ArrayList<IIndividu>(Arrays.asList(new IIndividu[] {individu1, individu2}));
 		
 		//Si le hasard en décide ainsi (et que les individus sont du même type, on effectue le crossOver
 		if(this.doCrossOver() && individu1.getType().equals(individu2.getType())){

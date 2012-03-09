@@ -33,7 +33,7 @@ public class ConditionArretEpsilon extends ConditionArret{
 	
 	/**
 	 * Constructeur basic de la condition d'arrêt
-	 * @param epsilon, la valeur du esilon de la condition d'arrêt epsilon
+	 * @param epsilon : la valeur du esilon de la condition d'arrêt epsilon
 	 */
 	public ConditionArretEpsilon(double epsilon) {
 		this.epsilon = epsilon;

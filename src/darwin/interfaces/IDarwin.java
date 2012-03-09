@@ -14,7 +14,7 @@ public interface IDarwin {
 	
 	/**
 	 * Fait tourner l'algorithme génétique jusqu'à ce que la condition d'arrêt finale soit remplie
-	 * @return
+	 * @return La population finale
 	 */
 	IPopulation solve();
 	

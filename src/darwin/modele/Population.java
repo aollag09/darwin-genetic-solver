@@ -31,7 +31,7 @@ public abstract class Population implements IPopulation {
 	
 	/**
 	 * Constructeur basique
-	 * @param nombreIndividusTheorique
+	 * @param nombreIndividusSouhaites
 	 * @param environnement
 	 */
 	protected Population(int nombreIndividusSouhaites, IEnvironnement environnement){

@@ -28,7 +28,7 @@ public abstract class Individu implements IIndividu {
 	 */
 	protected Individu(){
 	}
-	
+
 	/**
 	 * Construteur basique 
 	 * @param name

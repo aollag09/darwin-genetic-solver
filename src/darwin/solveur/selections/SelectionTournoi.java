@@ -1,16 +1,11 @@
 package darwin.solveur.selections;
 
-import java.net.IDN;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import tuples.PopulationTuples;
-
 import darwin.interfaces.IIndividu;
 import darwin.interfaces.IPopulation;
-import darwin.interfaces.ISelection;
-import darwin.modele.Individu;
 import darwin.modele.Selection;
 
 /**

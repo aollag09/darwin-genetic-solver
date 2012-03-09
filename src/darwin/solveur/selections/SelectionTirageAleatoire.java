@@ -43,7 +43,7 @@ public class SelectionTirageAleatoire extends Selection{
 	/**
 	 * Selectionne un individu au hasard dans la population
 	 * @param population
-	 * @return
+	 * @return IIndividu l'individu selectionné au hasard
 	 */
 	protected IIndividu selectionUnique(IPopulation population){
 		int i = (int)(Math.random()*population.getTailleEffective());

@@ -19,7 +19,7 @@ public class ResolutionTuples {
 			
 			IConditionArret c = /*new ConditionArretEpsilon(0.05);*/new ConditionArret() {
 				
-				int c = 40;
+				int c = 10;
 				double ancienScore = 0;
 				double epsilon = 0.05;
 				

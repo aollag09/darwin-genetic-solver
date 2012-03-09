@@ -23,14 +23,17 @@ import darwin.modele.Selection;
  *
  */
 public class SelectionTournoi extends Selection{
-
+	
 	public SelectionTournoi(int nbIndividus) throws Exception {
 		super(nbIndividus);
 	}
 
 	@Override
 	public List<IIndividu> selectionner(IPopulation population) {
-		List<IIndividu> selectionnes = new ArrayList<IIndividu>(population.getListIndividus());
+		List<IIndividu> selectionnes = new ArrayList<IIndividu>(/*population.getListIndividus()*/);
+		for(IIndividu i : population.getListIndividus()){
+			selectionnes.add(i.clone());
+		}
 		tournoi(selectionnes, population);
 		return selectionnes;
 	}

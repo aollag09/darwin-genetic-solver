@@ -24,8 +24,19 @@ import darwin.modele.Selection;
  */
 public class SelectionTournoi extends Selection{
 	
+	/**
+	 * La liste des individus à retourner après une selection
+	 */
+	private ArrayList<IIndividu> individusGagnant;
+	
+	/**
+	 * Constructeur de base
+	 * @param nbIndividus, le nombre d'individus à selectionner
+	 * @throws Exception
+	 */
 	public SelectionTournoi(int nbIndividus) throws Exception {
 		super(nbIndividus);
+		individusGagnant = new ArrayList<IIndividu>();
 	}
 
 	@Override
@@ -35,7 +46,7 @@ public class SelectionTournoi extends Selection{
 			selectionnes.add(i.clone());
 		}
 		tournoi(selectionnes, population);
-		return selectionnes;
+		return individusGagnant;
 	}
 	
 	/**
@@ -83,8 +94,10 @@ public class SelectionTournoi extends Selection{
 				individusCourant.add(individus.get(i));
 			}
 			/* On met a jour la liste des selection a retourner */
-			individus.clear();
-			individus.addAll(individusCourant);
+			individusGagnant.clear();
+			individusGagnant.addAll(individusCourant);
+			//TODO
+			System.out.println();
 		}
 	}
 	

@@ -12,16 +12,16 @@ public class ResolutionTuples {
 
 	public static void main(String[] args){
 		
-		IPopulation p = new PopulationTuples(50, 5, new int[] {1,2,4,0,15});
+		IPopulation p = new PopulationTuples(20, 5, new int[] {1,2,4,0,15});
 		
 		try {
-			ISelectionNaturelle selec = new SelectionNaturelleSimple(p, 30, 3, 0.7, 1, 0.9, 20);
+			ISelectionNaturelle selec = new SelectionNaturelleSimple(p, 15, 1, 0.7, 1, 0.3, 10, 0.1);
 			
 			IConditionArret c = new ConditionArret() {
 				
 				int c = 40;
 				double ancienScore = 0;
-				double epsilon = 0.5;
+				double epsilon = 0.05;
 				
 				@Override
 				public IEnvironnement nextEnvironnement() {
@@ -50,6 +50,7 @@ public class ResolutionTuples {
 			
 			Darwin d = new Darwin(selec, c);
 			d.afficherChaqueScore(true);
+			d.afficherChaqueGeneration(true);
 			IPopulation p1 = d.solve();
 			System.out.println("Meilleur : " + p1.getBestIndividu() + " (" + p1.evaluerIndividu(p1.getBestIndividu()) + ")");
 		} catch (Exception e) {

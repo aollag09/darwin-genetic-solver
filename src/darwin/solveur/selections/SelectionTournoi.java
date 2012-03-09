@@ -41,10 +41,7 @@ public class SelectionTournoi extends Selection{
 
 	@Override
 	public List<IIndividu> selectionner(IPopulation population) {
-		List<IIndividu> selectionnes = new ArrayList<IIndividu>(/*population.getListIndividus()*/);
-		for(IIndividu i : population.getListIndividus()){
-			selectionnes.add(i.clone());
-		}
+		List<IIndividu> selectionnes = new ArrayList<IIndividu>(population.getListIndividus());
 		tournoi(selectionnes, population);
 		return individusGagnant;
 	}

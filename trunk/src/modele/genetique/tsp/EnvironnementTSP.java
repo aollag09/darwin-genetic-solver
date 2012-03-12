@@ -152,7 +152,7 @@ public class EnvironnementTSP extends Environnement{
 			distanceTotale += Road.getDistance(	(Ville) chemin.getCaracteristique(i),
 												(Ville) chemin.getCaracteristique(i+1));
 		}
-		return distanceTotale;
+		return -distanceTotale;
 	}
 
 	@Override

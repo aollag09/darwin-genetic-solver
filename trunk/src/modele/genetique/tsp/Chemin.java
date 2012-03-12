@@ -30,10 +30,18 @@ public class Chemin extends Individu{
 
 	@Override
 	public Individu clone() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Chemin(this);
 	}
 
+	
+	@Override
+	public String toString() {
+		String s = "";
+		for(int i = 0; i< this.getListCaracteristique().size(); i++){
+			s+= this.getCaracteristique(i).toString()+",";
+		}
+		return s;
+	}
 
 
 	

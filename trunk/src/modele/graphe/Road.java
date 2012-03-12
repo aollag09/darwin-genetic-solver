@@ -34,7 +34,7 @@ public class Road {
 	}
 	
 	public static double getDistance(Ville t1, Ville t2){
-		return Math.sqrt( (t1.getPosition().getY() - t2.getPosition().getY())*(t1.getPosition().getY() - t2.getPosition().getY()) +
+		return Math.sqrt( (t1.getPosition().getX() - t2.getPosition().getX())*(t1.getPosition().getX() - t2.getPosition().getX()) +
 				(t1.getPosition().getY() - t2.getPosition().getY())*(t1.getPosition().getY() - t2.getPosition().getY()));
 	}
 	

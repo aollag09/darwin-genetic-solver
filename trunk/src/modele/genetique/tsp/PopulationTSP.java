@@ -77,6 +77,11 @@ public class PopulationTSP extends Population {
 			Road r = new Road(Road.getDistance(v1, v2));
 			g.addEdge(r, v1, v2);
 		}
+		// Ajout de la route entre la première et oa dernière ville
+		Ville v1 = (Ville) chemin.getCaracteristique(0);
+		Ville v2 = (Ville) chemin.getCaracteristique(chemin.getListCaracteristique().size() - 1);
+		Road r = new Road(Road.getDistance(v1, v2));
+		g.addEdge(r, v1, v2);
 		// Affichage du graphe
 		return g.afficher(d);
 	}

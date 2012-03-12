@@ -46,12 +46,13 @@ public abstract class Population implements IPopulation {
 	}
 
 	@Override
-	public double evaluerIndividu(IIndividu individu) {
-		return this.getEnvironnement().evaluerIndividu(individu);
+	public double evaluerIndividu(IIndividu individu) throws Exception {
+		double retour = this.getEnvironnement().evaluerIndividu(individu);
+		return retour;
 	}
 
 	@Override
-	public double evaluerIndividu(int index) {
+	public double evaluerIndividu(int index) throws Exception {
 		return this.evaluerIndividu(this.getIndividu(index));
 	}
 
@@ -59,7 +60,12 @@ public abstract class Population implements IPopulation {
 	public double evaluerPopulation() {
 		double retour = 0;
 		for(IIndividu i: this.getListIndividus()){
-			retour += this.evaluerIndividu(i);
+			try {
+				retour += this.evaluerIndividu(i);
+			} catch (Exception e) {
+				System.out.println("L'individu " + i + "n'est pas évaluable");
+				e.printStackTrace();
+			}
 		}
 		return retour;
 	}
@@ -106,8 +112,12 @@ public abstract class Population implements IPopulation {
 	public IIndividu getBestIndividu(){
 		IIndividu retour = this.getIndividu(0);
 		for(int i=1; i<this.getTailleEffective(); i++){
-			if(this.evaluerIndividu(retour) < this.evaluerIndividu(this.getIndividu(i))){
-				retour = this.getIndividu(i);
+			try {
+				if(this.evaluerIndividu(retour) < this.evaluerIndividu(this.getIndividu(i))){
+					retour = this.getIndividu(i);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 		return retour;

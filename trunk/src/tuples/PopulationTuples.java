@@ -23,14 +23,23 @@ public class PopulationTuples extends Population{
 			for(int j=0; j<t.length; j++){
 				t[j] = (int) (Math.random()*(Entier.MAX_ENTIER+1));
 			}
-			this.individus.add(new Tuple(this.tailleTuples,t, i));
+			try {
+				this.individus.add(new Tuple(this.tailleTuples,t, i));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public String toString(){
 		String retour = "";
 		for(IIndividu indiv : this.getListIndividus()){
-			retour += indiv + " Score : " + this.evaluerIndividu(indiv) + "\n";
+			try {
+				retour += indiv + " Score : " + this.evaluerIndividu(indiv) + "\n";
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return retour;
 	}

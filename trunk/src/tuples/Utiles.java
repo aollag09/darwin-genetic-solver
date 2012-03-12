@@ -19,6 +19,11 @@ public class Utiles {
 	}
 
 
+	/**
+	 * 
+	 * @param nombre
+	 * @return Le BitSet correspondant à la valeur donnée en paramètre
+	 */
 	public static BitSet convertInBitSet(int nombre){
 		BitSet toReturn = new BitSet();
 		int index = 0;
@@ -32,6 +37,11 @@ public class Utiles {
 		return toReturn;
 	}
 
+	/**
+	 * 
+	 * @param bitSet
+	 * @return La valeur correspondant au BitSet donné en paramètre
+	 */
 	public static int intFromBitSet(BitSet bitSet){
 		int retour = 0;
 		for(int i=bitSet.nextSetBit(0); i>=0; i = bitSet.nextSetBit(i+1)){

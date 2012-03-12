@@ -11,13 +11,14 @@ public interface IEnvironnement {
 	 * 
 	 * @param individu
 	 * @return un double correspondant à l'évaluation de l'individu
+	 * @throws Exception Si l'individu ne peut pas être évalué
 	 */
-	double evaluerIndividu(IIndividu individu);
+	double evaluerIndividu(IIndividu individu) throws Exception;
 	
 	/**
 	 * 
 	 * @param individu
-	 * @return true si l'individu est valide dans cet environnement
+	 * @return true si l'individu est valide et évaluable dans cet environnement
 	 */
 	boolean isValid(IIndividu individu);
 	

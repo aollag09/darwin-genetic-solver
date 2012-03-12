@@ -30,7 +30,11 @@ public class SelectionRoulette extends Selection{
 			/* On attribue une probabilité à chaque individu de la population en fonction de son score*/
 			double[] probs = new double[population.getTailleEffective()];
 			for(int i=0; i<probs.length; i++){
-				probs[i] = population.evaluerIndividu(population.getIndividu(i))/scorePop;
+				try {
+					probs[i] = population.evaluerIndividu(population.getIndividu(i))/scorePop;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 			
 			/* Initialisation de la liste des individus selectionnés */

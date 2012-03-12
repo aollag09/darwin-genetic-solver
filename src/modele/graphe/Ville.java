@@ -45,6 +45,14 @@ public class Ville extends Caracteristique {
 	
 	// AUTRES METHODES
 
+	public Ville(Ville ville) {
+		this.id 			= ville.id;
+		this.position 		= ville.position;
+		this.bitSet 		= ville.bitSet;
+		this.tailleBitSet 	= ville.tailleBitSet;
+		this.nom 			= ville.nom;
+	}
+
 	public String toString(){
 		return id+"";
 	}
@@ -98,12 +106,13 @@ public class Ville extends Caracteristique {
 
 	@Override
 	public void update() {
-		
+		int value = Utiles.intFromBitSet(this.getBitSet());
+		this.id = value;	
 	}
 
 	@Override
 	public Caracteristique clone() {
-		return null;
+		return new Ville(this);
 	}
 	
 	

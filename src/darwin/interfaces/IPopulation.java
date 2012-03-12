@@ -64,15 +64,17 @@ public interface IPopulation {
 	 * 
 	 * @param individu L'individu à evaluer
 	 * @return Un double correspondant à l'évaluation de l'individu dans l'environnement auquel est il est soumis
+	 * @throws Exception Si l'individu n'est pas évaluable dans l'environnement actuel
 	 */
-	double evaluerIndividu(IIndividu individu);
+	double evaluerIndividu(IIndividu individu) throws Exception;
 	
 	/**
 	 * 
 	 * @param index L'index de l'individu à évaluer
 	 * @return L'évaluation de l'individu placé à l'index donné dans la population
+	 * @throws Exception Si l'individu n'est pas évaluable dans l'environnement actuel
 	 */
-	double evaluerIndividu(int index);
+	double evaluerIndividu(int index) throws Exception;
 	
 	/**
 	 * 

@@ -14,9 +14,10 @@ import darwin.solveur.SelectionNaturelleSimple;
 public class ResolutionTuples {
 
 	public static void main(String[] args){
+		double t1 = System.currentTimeMillis();
 		ArrayList<Number> s = new ArrayList<Number>();
 		ArrayList<IIndividu> bests = new ArrayList<IIndividu>();
-		for(int i=0;i<300;i++){
+		for(int i=0;i<1;i++){
 	
 			IPopulation p = new PopulationTuples(300, 10, new int[] {1,2,4,0,15,20,2,5,18,17});
 			
@@ -25,7 +26,7 @@ public class ResolutionTuples {
 				
 				IConditionArret c = /*new ConditionArretEpsilon(0.05);*/new ConditionArret() {
 					
-					int c = 15;
+					int c = 40;
 					double ancienScore = 0;
 					double epsilon = 0.05;
 					
@@ -36,7 +37,7 @@ public class ResolutionTuples {
 					
 					@Override
 					public IConditionArret nextConditionArret() {
-						if(c>0){
+						if(c>0 && ancienScore<600){
 							c--;
 							return this;
 						}
@@ -75,5 +76,6 @@ public class ResolutionTuples {
 			System.out.println(bests.get(i) + " Score : " + s.get(i));
 		}
 		System.out.println("\n" + "Score moyen : " + moyenne/bests.size());
+		System.out.println("Temps de recherche : " + (System.currentTimeMillis() - t1)/1000);
 	}
 }

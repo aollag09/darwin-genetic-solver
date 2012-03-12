@@ -35,26 +35,30 @@ public class SelectionElitiste extends Selection{
 			}
 			/* On traite les tous les autres éléments */
 			for(int i = 0; i < population.getTailleEffective(); i++){
-				double evaluationCourante = population.evaluerIndividu(population.getIndividu(i));
-				int indexBest = 0;
-				while( indexBest < this.nbIndivus){
-					if(selectionnes.get(indexBest) == null ||
-							evaluationCourante > population.evaluerIndividu(selectionnes.get(indexBest))){
-						/* On ajoute l'individu courant à la liste des selectionnés au bon index*/
-						/* 2 étapes :*/
-						/* 1°) Décaler les indices supérieurs d'un rang de 1 car on insère un nouvel élément*/
-						if(indexBest < this.nbIndivus - 1){
-							/* Si celui déjà selectionné n'est pas le dernier élément */
-							for(int j = this.nbIndivus - 2; j>= indexBest; j--){
-								selectionnes.set(j+1, selectionnes.get(j));
+				try{
+					double evaluationCourante = population.evaluerIndividu(population.getIndividu(i));
+					int indexBest = 0;
+					while( indexBest < this.nbIndivus){
+						if(selectionnes.get(indexBest) == null ||
+								evaluationCourante > population.evaluerIndividu(selectionnes.get(indexBest))){
+							/* On ajoute l'individu courant à la liste des selectionnés au bon index*/
+							/* 2 étapes :*/
+							/* 1°) Décaler les indices supérieurs d'un rang de 1 car on insère un nouvel élément*/
+							if(indexBest < this.nbIndivus - 1){
+								/* Si celui déjà selectionné n'est pas le dernier élément */
+								for(int j = this.nbIndivus - 2; j>= indexBest; j--){
+									selectionnes.set(j+1, selectionnes.get(j));
+								}
 							}
-						}
-						/* 2°) Ajouter le nouvelle individu au bon rang des meilleurs */
-						selectionnes.set(indexBest, population.getIndividu(i));
-						/* Toutes les modifications étant apportées, on sort de la boucle */
-						indexBest = this.nbIndivus + 1;
-					}else
-						indexBest ++;
+							/* 2°) Ajouter le nouvelle individu au bon rang des meilleurs */
+							selectionnes.set(indexBest, population.getIndividu(i));
+							/* Toutes les modifications étant apportées, on sort de la boucle */
+							indexBest = this.nbIndivus + 1;
+						}else
+							indexBest ++;
+					}
+				}catch(Exception e){
+					e.printStackTrace();
 				}
 			}
 			return selectionnes;

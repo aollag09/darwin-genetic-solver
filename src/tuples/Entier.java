@@ -4,16 +4,33 @@ import darwin.modele.Caracteristique;
 
 public class Entier extends Caracteristique{
 
+	/**
+	 * La valeur de l'entier
+	 */
 	private int valeur;
 	
+	/**
+	 * @return La valeur de l'entier
+	 */
 	public int getValeur() {
 		return valeur;
 	}
 
+	/**
+	 * La valeur maximum possible pour un entier
+	 */
 	public static final int MAX_ENTIER = 20;
 	
+	/**
+	 * Le nom de la caractéristique
+	 */
 	private static final String NOM_ENTIER = "Entier";
 	
+	/**
+	 * Constructeur à partir d'une valeur
+	 * @param valeur
+	 * @throws Exception si la valeur est négative ou supérieure au maximum
+	 */
 	public Entier(int valeur) throws Exception{
 		this.nom = NOM_ENTIER;
 		if(valeur < 0 || valeur > MAX_ENTIER){
@@ -25,6 +42,10 @@ public class Entier extends Caracteristique{
 		this.tailleBitSet = Utiles.nombreBitNecessairesPour(valeur);
 	}
 	
+	/**
+	 * Constructeur par copie profonde (pour le clone)
+	 * @param e
+	 */
 	protected Entier(Entier e){
 		super(e);
 		this.valeur = e.getValeur();

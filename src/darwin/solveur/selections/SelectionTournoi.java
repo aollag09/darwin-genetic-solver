@@ -51,48 +51,52 @@ public class SelectionTournoi extends Selection{
 	 * en fonction du nombre d'individus souhaités à l'arrivée.
 	 */
 	private void tournoi(List<IIndividu> individus, IPopulation population){
-		/* Déclaration de la liste des individus sélection poue la  manche du tournoi */
-		ArrayList<IIndividu> individusCourant = new ArrayList<IIndividu>();
-		if(individus.size() > this.nbIndivus * 2 ){
-			/* Dans ce cas là tous les individus se rencontrent deux à deux ! */
-			/* On shuffle la liste */
-			Collections.shuffle(individus);
-			/* On vérifie que la liste est paire ou on gère le cas impaire*/
-			int size = (individus.size() % 2 == 0) ? (int)(individus.size()) : (int)(individus.size() - 1.0);
-			/* On confronte les individus deux à deux de suite dans la liste mélangée */
-			for(int i = 0; i<size; i+=2){
-				IIndividu id1 = individus.get(i);
-				IIndividu id2 = individus.get(i+1);
-				IIndividu gagnant = population.evaluerIndividu(id1)>population.evaluerIndividu(id2) ? id1 : id2;
-				individusCourant.add(gagnant);
+		try{
+			/* Déclaration de la liste des individus sélection poue la  manche du tournoi */
+			ArrayList<IIndividu> individusCourant = new ArrayList<IIndividu>();
+			if(individus.size() > this.nbIndivus * 2 ){
+				/* Dans ce cas là tous les individus se rencontrent deux à deux ! */
+				/* On shuffle la liste */
+				Collections.shuffle(individus);
+				/* On vérifie que la liste est paire ou on gère le cas impaire*/
+				int size = (individus.size() % 2 == 0) ? (int)(individus.size()) : (int)(individus.size() - 1.0);
+				/* On confronte les individus deux à deux de suite dans la liste mélangée */
+				for(int i = 0; i<size; i+=2){
+					IIndividu id1 = individus.get(i);
+					IIndividu id2 = individus.get(i+1);
+					IIndividu gagnant = population.evaluerIndividu(id1)>population.evaluerIndividu(id2) ? id1 : id2;
+					individusCourant.add(gagnant);
+				}
+				if(size == individus.size() - 1)/* Cas ou le liste est impaire on ajoute le dernier élément*/
+					individusCourant.add(individus.get(individus.size() - 1));
+				/* Appel recursif de la méthode */
+				tournoi(individusCourant,population);
+			}else{
+				/* C'est l'étape finale du tournoi !*/
+				/* Le but ici est de se faire s'affronter suffisament d'individus pour optenir 
+				 * le nombre souhaité d'individus finalement
+				 */
+				int nombreDAffrontements = (individus.size() - this.nbIndivus);
+				/* On shuffle la liste */
+				Collections.shuffle(individus);
+				for(int i = 0; i<2*nombreDAffrontements - 1; i+=2){
+					/* On se fait affronter le bon nombre d'individus */
+					IIndividu id1 = individus.get(i);
+					IIndividu id2 = individus.get(i+1);
+					IIndividu gagnant = population.evaluerIndividu(id1)>population.evaluerIndividu(id2) ? id1 : id2;
+					individusCourant.add(gagnant);
+				}
+				for(int i = 2*nombreDAffrontements; i < individus.size(); i++){
+					/* Tous les autres individus n'ont pas besoin d'être affronter, on les rajoute directement
+					 * à la liste des individus séléctionnés */
+					individusCourant.add(individus.get(i));
+				}
+				/* On met a jour la liste des selection a retourner */
+				individusGagnant.clear();
+				individusGagnant.addAll(individusCourant);
 			}
-			if(size == individus.size() - 1)/* Cas ou le liste est impaire on ajoute le dernier élément*/
-				individusCourant.add(individus.get(individus.size() - 1));
-			/* Appel recursif de la méthode */
-			tournoi(individusCourant,population);
-		}else{
-			/* C'est l'étape finale du tournoi !*/
-			/* Le but ici est de se faire s'affronter suffisament d'individus pour optenir 
-			 * le nombre souhaité d'individus finalement
-			 */
-			int nombreDAffrontements = (individus.size() - this.nbIndivus);
-			/* On shuffle la liste */
-			Collections.shuffle(individus);
-			for(int i = 0; i<2*nombreDAffrontements - 1; i+=2){
-				/* On se fait affronter le bon nombre d'individus */
-				IIndividu id1 = individus.get(i);
-				IIndividu id2 = individus.get(i+1);
-				IIndividu gagnant = population.evaluerIndividu(id1)>population.evaluerIndividu(id2) ? id1 : id2;
-				individusCourant.add(gagnant);
-			}
-			for(int i = 2*nombreDAffrontements; i < individus.size(); i++){
-				/* Tous les autres individus n'ont pas besoin d'être affronter, on les rajoute directement
-				 * à la liste des individus séléctionnés */
-				individusCourant.add(individus.get(i));
-			}
-			/* On met a jour la liste des selection a retourner */
-			individusGagnant.clear();
-			individusGagnant.addAll(individusCourant);
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 	

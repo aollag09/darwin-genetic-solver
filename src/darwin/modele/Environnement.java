@@ -28,7 +28,7 @@ public abstract class Environnement implements IEnvironnement{
 		this.name = name;
 	}
 	
-	public abstract double evaluerIndividu(IIndividu individu);
+	public abstract double evaluerIndividu(IIndividu individu) throws Exception;
 	
 	public abstract boolean isValid(IIndividu individu);
 	

@@ -98,13 +98,11 @@ public class Ville extends Caracteristique {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public Caracteristique clone() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

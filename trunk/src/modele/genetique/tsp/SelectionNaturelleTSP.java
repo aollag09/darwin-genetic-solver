@@ -13,8 +13,8 @@ import darwin.solveur.SelectionNaturelleSimple;
 public class SelectionNaturelleTSP extends SelectionNaturelleSimple {
 
 	public SelectionNaturelleTSP(ISelection selection,ISelection selection2, ICrossOver crossOver,
-			IMutation mutation, IPopulation population) throws Exception {
-		super(selection, selection2, crossOver, mutation, population, 2, 0.5);
+			IMutation mutation, IPopulation population, int nombreCouples, double propabilite) throws Exception {
+		super(selection, selection2, crossOver, mutation, population, nombreCouples, propabilite);
 	}
 	
 }

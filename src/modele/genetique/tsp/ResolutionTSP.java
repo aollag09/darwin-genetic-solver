@@ -19,10 +19,10 @@ public class ResolutionTSP {
 	public ResolutionTSP() {
 		try {
 			EnvironnementTSP env = new EnvironnementTSP();
-			PopulationTSP population = new PopulationTSP(100, env);
-			SelectionNaturelleTSP stsp = new SelectionNaturelleTSP(new SelectionTournoi(50), 
-									new SelectionElitiste(100), new CrossOverChemin(0.7), new MutationSimple(2, 0),population);
-			Darwin d = new Darwin(stsp, new ConditionArretEpsilonAvecMarge(0.001, 3000));
+			PopulationTSP population = new PopulationTSP(300, env);
+			SelectionNaturelleTSP stsp = new SelectionNaturelleTSP(new SelectionTournoi(180), 
+									new SelectionElitiste(300), new CrossOverChemin(0.7), new MutationSimple(2, 0),population,10,0.7);
+			Darwin d = new Darwin(stsp, new ConditionArretEpsilonAvecMarge(0.001, 100));
 			//d.afficherChaqueGeneration(true);
 			d.afficherChaqueScore(true);
 			d.solve();
@@ -33,6 +33,11 @@ public class ResolutionTSP {
 			f.setVisible(true);
 			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			f.setContentPane(population.afficherGraphiquementIndividu(c, dim));
+			
+			System.out.println("====================== BEST PATH =========================");
+			System.out.println(c.toString());
+			System.out.println("VALUE >>>>> "+population.evaluerIndividu(c));
+			System.out.println("BEST  >>>>> "+" 7542 (pour le problème de Berlin52)");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

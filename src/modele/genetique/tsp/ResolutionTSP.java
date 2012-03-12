@@ -19,9 +19,9 @@ public class ResolutionTSP {
 	public ResolutionTSP() {
 		try {
 			EnvironnementTSP env = new EnvironnementTSP();
-			PopulationTSP population = new PopulationTSP(300, env);
-			SelectionNaturelleTSP stsp = new SelectionNaturelleTSP(new SelectionTournoi(180), 
-									new SelectionElitiste(300), new CrossOverChemin(0.7), new MutationSimple(2, 0),population,10,0.7);
+			PopulationTSP population = new PopulationTSP(200, env);
+			SelectionNaturelleTSP stsp = new SelectionNaturelleTSP(new SelectionTournoi(100), 
+									new SelectionElitiste(200), new CrossOverChemin(0.7), new MutationSimple(2, 0),population,10,0.7);
 			Darwin d = new Darwin(stsp, new ConditionArretEpsilonAvecMarge(0.001, 100));
 			//d.afficherChaqueGeneration(true);
 			d.afficherChaqueScore(true);

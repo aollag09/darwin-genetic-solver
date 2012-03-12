@@ -34,6 +34,12 @@ public interface IIndividu extends Cloneable{
 	List<ICaracteristique> getListCaracteristique();
 	
 	/**
+	 * Définit la liste de caractéristique donnée en paramètre comme étant
+	 * le génome de l'individu
+	 */
+	void setListCaracteristiques(List<ICaracteristique> caracs);
+	
+	/**
 	 * 
 	 * @param index
 	 * @return La caractéristique placée à l'index donnée en paramètre

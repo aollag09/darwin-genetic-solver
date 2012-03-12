@@ -57,6 +57,12 @@ public abstract class Individu implements IIndividu {
 	public List<ICaracteristique> getListCaracteristique() {
 		return this.caracteristiques;
 	}
+	
+	@Override
+	public void setListCaracteristiques(List<ICaracteristique> caracs){
+		this.caracteristiques = caracs;
+	}
+	
 	@Override
 	public ICaracteristique getCaracteristique(int index){
 		return this.getListCaracteristique().get(index);

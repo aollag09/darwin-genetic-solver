@@ -22,7 +22,7 @@ public class ResolutionTSP {
 			PopulationTSP population = new PopulationTSP(100, env);
 			SelectionNaturelleTSP stsp = new SelectionNaturelleTSP(new SelectionTournoi(50), 
 									new SelectionElitiste(100), new CrossOverChemin(0.7), new MutationSimple(2, 0),population);
-			Darwin d = new Darwin(stsp, new ConditionArretEpsilonAvecMarge(0.001, 10000));
+			Darwin d = new Darwin(stsp, new ConditionArretEpsilonAvecMarge(0.001, 3000));
 			//d.afficherChaqueGeneration(true);
 			d.afficherChaqueScore(true);
 			d.solve();

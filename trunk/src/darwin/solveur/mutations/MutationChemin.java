@@ -22,8 +22,8 @@ public class MutationChemin extends Mutation {
 		if(this.mutationIndividuPossible(nIndividu)){
 			for(int i = 0; i< nombreCaractereAMuter; i++){
 				/* On choisi aléatoirement le caractère à muter */
-				int caracAMuter = (int) (Math.random())* individu.getNombreCaracteristiques() - 1;
-				int newPosition = (int) (Math.random())* individu.getNombreCaracteristiques() - 1;
+				int caracAMuter = (int) (Math.random()* individu.getNombreCaracteristiques() - 1);
+				int newPosition = (int) (Math.random()* individu.getNombreCaracteristiques() - 1);
 				ICaracteristique c1 = individu.getCaracteristique(caracAMuter);
 				ICaracteristique c2 = individu.getCaracteristique(newPosition);
 				individu.getListCaracteristique().set(newPosition,c1);
@@ -39,6 +39,11 @@ public class MutationChemin extends Mutation {
 			ICaracteristique caracteristique) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public boolean mutationIndividuPossible(IIndividu individu) {
+		return individu.getNombreCaracteristiques()>1;
 	}
 
 }

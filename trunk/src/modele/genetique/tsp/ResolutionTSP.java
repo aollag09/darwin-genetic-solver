@@ -11,6 +11,7 @@ import darwin.solveur.conditions.ConditionArretEpsilonAvecMarge;
 import darwin.solveur.crossovers.CrossOverChemin;
 import darwin.solveur.mutations.MutationSimple;
 import darwin.solveur.selections.SelectionElitiste;
+import darwin.solveur.selections.SelectionRoulette;
 import darwin.solveur.selections.SelectionTournoi;
 
 public class ResolutionTSP {
@@ -19,10 +20,10 @@ public class ResolutionTSP {
 	public ResolutionTSP() {
 		try {
 			EnvironnementTSP env = new EnvironnementTSP();
-			PopulationTSP population = new PopulationTSP(200, env);
-			SelectionNaturelleTSP stsp = new SelectionNaturelleTSP(new SelectionTournoi(100), 
-									new SelectionElitiste(200), new CrossOverChemin(0.7), new MutationSimple(2, 0),population,10,0.7);
-			Darwin d = new Darwin(stsp, new ConditionArretEpsilonAvecMarge(0.001, 100));
+			PopulationTSP population = new PopulationTSP(100, env);
+			SelectionNaturelleTSP stsp = new SelectionNaturelleTSP(new SelectionRoulette(40), 
+									new SelectionElitiste(50), new CrossOverChemin(0.7), new MutationSimple(2, 0),population,10,1);
+			Darwin d = new Darwin(stsp, new ConditionArretEpsilonAvecMarge(0.001, 5000));
 			//d.afficherChaqueGeneration(true);
 			d.afficherChaqueScore(true);
 			d.solve();

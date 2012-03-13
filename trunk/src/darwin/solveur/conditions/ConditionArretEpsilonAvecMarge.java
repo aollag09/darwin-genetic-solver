@@ -50,8 +50,10 @@ public class ConditionArretEpsilonAvecMarge extends ConditionArret {
 			marge--;
 			return this;
 		}
-		else
+		else{
+			marge = 0;
 			return null;
+		}
 	}
 
 	@Override

@@ -92,4 +92,9 @@ public class MutationSimple extends Mutation{
 		return (caracteristique.getTailleBitSet() > nbBitAMuter);
 	}
 
+	@Override
+	public boolean mutationIndividuPossible(IIndividu individu) {
+		return (individu.getNombreCaracteristiques() != 0);
+	}
+
 }

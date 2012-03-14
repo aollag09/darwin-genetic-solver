@@ -1,11 +1,20 @@
 package darwin.solveur;
 
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
 import darwin.interfaces.IConditionArret;
 import darwin.interfaces.IDarwin;
 import darwin.interfaces.IPopulation;
 import darwin.interfaces.ISelectionNaturelle;
 
-public class Darwin implements IDarwin {
+public class Darwin extends UnicastRemoteObject implements IDarwin, Serializable {
+
+	/**
+	 * Un identifiant pour être Marchable sur le réseau 
+	 */
+	private static final long serialVersionUID = -629791890658867547L;
 
 	// VARIABLES D'INSTANCE
 	/**
@@ -21,9 +30,19 @@ public class Darwin implements IDarwin {
 	 */
 	protected IConditionArret conditionArret;
 	
-	public Darwin(ISelectionNaturelle selectionNaturelle, IConditionArret conditionArret){
+	public Darwin(ISelectionNaturelle selectionNaturelle, IConditionArret conditionArret)
+		throws RemoteException{
 		this.selectionNaturelle = selectionNaturelle;
 		this.setConditionArret(conditionArret);
+		this.afficherChaqueGeneration(false);
+		this.afficherChaqueScore(false);
+		this.afficherIterations(true);
+	}
+	
+	/**
+	 * Constructeur Vide
+	 */
+	public Darwin() throws RemoteException {
 		this.afficherChaqueGeneration(false);
 		this.afficherChaqueScore(false);
 		this.afficherIterations(true);
@@ -91,6 +110,10 @@ public class Darwin implements IDarwin {
 			if(this.afficherChaqueScore){
 				System.out.println("Score : " + this.getSelectionNaturelle().getPopulation().evaluerPopulation());
 			}
+//			if(this.afficherIterations){
+//				System.out.println("Itérations :" + iterations);
+//			}
+//			iterations ++;
 		}
 		
 		System.out.println("-----------------------------------------------------");
@@ -117,5 +140,10 @@ public class Darwin implements IDarwin {
 	
 	public void afficherIterations(boolean b){
 		this.afficherIterations = b;
+	}
+
+	@Override
+	public void setSelectionNaturelle(ISelectionNaturelle newSelectionNaturelle) {
+		this.selectionNaturelle = newSelectionNaturelle;		
 	}
 }

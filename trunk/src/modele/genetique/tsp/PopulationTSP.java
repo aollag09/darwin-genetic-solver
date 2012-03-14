@@ -91,7 +91,7 @@ public class PopulationTSP extends Population {
 		String s = "";
 		for(IIndividu i : this.getListIndividus()){
 			try {
-				s+= "Evaluation : "+this.evaluerIndividu(i)+" "+ i;
+				s+= "Evaluation : "+this.evaluerIndividu(i)+" "+ i + "\n";
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

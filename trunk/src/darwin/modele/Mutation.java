@@ -36,9 +36,7 @@ public abstract class Mutation implements IMutation{
 	
 	public abstract IIndividu muter(IIndividu individu);
 
-	public boolean mutationIndividuPossible(IIndividu individu){
-		return (individu.getNombreCaracteristiques() != 0);
-	}
+	public abstract boolean mutationIndividuPossible(IIndividu individu);
 	
 	/**
 	 * 

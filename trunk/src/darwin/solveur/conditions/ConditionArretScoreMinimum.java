@@ -13,17 +13,28 @@ public class ConditionArretScoreMinimum extends ConditionArret{
 	 */
 	private double scoreMinimum;
 	
+	private double delta;
+	
 	/**
 	 * Constructeur simple de la condition d'arrêt
 	 * @param scroreMin la score miminum à atteindre
 	 */
-	public ConditionArretScoreMinimum(double scroreMin) {
+	public ConditionArretScoreMinimum(double scroreMin, double delta) {
 		this.setScoreMinimum(scroreMin);
+		this.delta = delta;
 	}
 	
 	@Override
 	public boolean isSatisfied(IPopulation population) {
-		return (population.evaluerPopulation() > scoreMinimum);
+		iterations++;
+		double d = 0;
+		try {
+			d = population.evaluerIndividu(population.getBestIndividu());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return (d > scoreMinimum+delta || iterations>199);
 	}
 
 	@Override

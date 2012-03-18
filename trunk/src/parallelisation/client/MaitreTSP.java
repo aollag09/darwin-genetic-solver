@@ -1,4 +1,4 @@
-package parralelisation.client;
+package parallelisation.client;
 
 import java.rmi.Naming;
 import java.util.ArrayList;
@@ -59,6 +59,7 @@ public class MaitreTSP {
 					new SelectionElitiste(10), new CrossOverChemin(0.8), new MutationChemin(0.9),population,10,1);
 			IConditionArret condition = new ConditionArretEpsilonAvecMarge(0.01, 500);
 			Requete r = new Requete(i, this, stsp, condition);
+			r.lancerRequete();
 			}
 			catch (Exception e) {
 				e.printStackTrace();
@@ -76,6 +77,7 @@ public class MaitreTSP {
 			indexServeur ++;
 			try { 
 				String adresse = CHEMIN_RESEAU+indexServeur;
+				@SuppressWarnings("unused")
 				IDarwin darwin = (IDarwin)Naming.lookup(adresse); 
 			}
 			catch (Exception e) { 

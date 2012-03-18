@@ -1,10 +1,10 @@
-package parralelisation.serveur;
+package parallelisation.serveur;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 
-import parralelisation.client.MaitreTSP;
+import parallelisation.client.MaitreTSP;
 
 
 import darwin.interfaces.IDarwin;

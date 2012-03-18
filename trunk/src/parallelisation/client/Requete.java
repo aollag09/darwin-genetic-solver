@@ -1,4 +1,4 @@
-package parralelisation.client;
+package parallelisation.client;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -39,7 +39,6 @@ public class Requete implements Runnable{
 		this.conditionDArret = conditionDArret;
 		
 		this.thread = new Thread(this);
-		this.thread.start();
 	}
 
 
@@ -71,6 +70,9 @@ public class Requete implements Runnable{
 
 	}
 
+	public void lancerRequete(){
+		this.thread.start();
+	}
 
 	public int getIdentifiantServeur() {
 		return identifiantServeur;

@@ -1,18 +1,15 @@
-package parralelisation.client;
+package parallelisation.client;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-
 import modele.genetique.tsp.EnvironnementTSP;
 import modele.genetique.tsp.PopulationTSP;
 import modele.genetique.tsp.SelectionNaturelleTSP;
 
 import darwin.interfaces.IConditionArret;
 import darwin.interfaces.IDarwin;
-import darwin.interfaces.IIndividu;
 import darwin.solveur.conditions.ConditionArretEpsilonAvecMarge;
 import darwin.solveur.crossovers.CrossOverChemin;
 import darwin.solveur.mutations.MutationChemin;

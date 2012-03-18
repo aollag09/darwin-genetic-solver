@@ -15,6 +15,8 @@ import darwin.modele.Selection;
  */
 public class SelectionRoulette extends Selection{
 
+	private static final long serialVersionUID = 2315932049980719818L;
+
 	public SelectionRoulette(int nbIndividus) throws Exception {
 		super(nbIndividus);
 	}

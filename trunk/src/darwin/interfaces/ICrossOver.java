@@ -1,12 +1,13 @@
 package darwin.interfaces;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author Dim && Momo
  *	Permet de croiser deux individus
  */
-public interface ICrossOver {
+public interface ICrossOver extends Serializable{
 
 	/**
 	 * 

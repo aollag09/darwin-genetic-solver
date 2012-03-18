@@ -11,6 +11,8 @@ public abstract class Environnement implements IEnvironnement{
 	
 	// VARIABLES D'INSTANCES :
 	
+	private static final long serialVersionUID = 3950886875103105136L;
+	
 	/** Le nom de l'environement */
 	protected String name;
 	

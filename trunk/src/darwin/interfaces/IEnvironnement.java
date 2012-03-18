@@ -1,11 +1,13 @@
 package darwin.interfaces;
 
+import java.io.Serializable;
+
 /**
  * @author Dim && Momo
  *	Représente un environnement, capable d'évaluer un individu. Il est essentiel de bien définir
  *	l'environnement associé à un problème afin de pouvoir le résoudre au mieux.
  */
-public interface IEnvironnement {
+public interface IEnvironnement extends Serializable {
 
 	/**
 	 * 

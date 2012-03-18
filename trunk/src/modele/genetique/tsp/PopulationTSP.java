@@ -22,7 +22,9 @@ public class PopulationTSP extends Population {
         
         // CONSTRUCTEUR 
         
-        public PopulationTSP() throws RemoteException {
+	private static final long serialVersionUID = -4816987600805972375L;
+
+		public PopulationTSP() throws RemoteException {
                 super();
         }
 

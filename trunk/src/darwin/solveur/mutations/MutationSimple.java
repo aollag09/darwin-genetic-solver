@@ -12,6 +12,9 @@ import darwin.modele.Mutation;
  */
 public class MutationSimple extends Mutation{
 
+	private static final long serialVersionUID = 1L;
+
+
 	// VARIABLES D'INSTANCE
 	/**
 	 * le nombre de bits à muter dans une caractéristique

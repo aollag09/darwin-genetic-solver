@@ -3,6 +3,7 @@
  */
 package darwin.interfaces;
 
+import java.io.Serializable;
 import java.util.BitSet;
 
 /**
@@ -11,7 +12,7 @@ import java.util.BitSet;
  *	avec un état particulier, on obtient un allèle de ce gène. Une caractéristique
  *	est clonable afin de pouvoir la modifier sans perdre l'originale.
  */
-public interface ICaracteristique extends Cloneable {
+public interface ICaracteristique extends Cloneable,Serializable {
 
 	/**
 	 * 

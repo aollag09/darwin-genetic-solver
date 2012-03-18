@@ -11,6 +11,10 @@ import darwin.interfaces.IIndividu;
  */
 public abstract class CrossOver implements ICrossOver {
 	
+
+	private static final long serialVersionUID = 6027347659484439067L;
+	
+	
 	//VARIABLES D'INSTANCE
 	/**
 	 * La probabilité que le crossOver ait lieu (doit être comprise entre 0 et 1)

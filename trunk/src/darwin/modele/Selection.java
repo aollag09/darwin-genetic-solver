@@ -12,6 +12,8 @@ import darwin.interfaces.ISelection;
  */
 public abstract class Selection implements ISelection {
 
+	private static final long serialVersionUID = -8582735176349401893L;
+	
 	// VARIABLES D'INSTANCE
 	/**
 	 * Le nombre d'individus à garder lors d'une selection (>=1)

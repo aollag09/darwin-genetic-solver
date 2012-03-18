@@ -4,6 +4,8 @@ import darwin.modele.Caracteristique;
 
 public class Entier extends Caracteristique{
 
+	private static final long serialVersionUID = 8586572209708716484L;
+
 	/**
 	 * La valeur de l'entier
 	 */

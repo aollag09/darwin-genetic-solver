@@ -24,6 +24,8 @@ import darwin.modele.Selection;
  */
 public class SelectionTournoi extends Selection{
 	
+	private static final long serialVersionUID = 109577977669810873L;
+	
 	/**
 	 * La liste des individus à retourner après une selection
 	 */

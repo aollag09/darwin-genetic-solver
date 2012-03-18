@@ -16,6 +16,10 @@ import darwin.modele.CrossOver;
  */
 public class CrossOverSimple extends CrossOver{
 	
+	
+	private static final long serialVersionUID = 1649476761942148889L;
+	
+	
 	// VARIABLES D'INSTANCE
 	/**
 	 * Le nombre de caractères à interchanger

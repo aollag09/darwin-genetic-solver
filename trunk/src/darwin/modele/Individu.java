@@ -13,6 +13,9 @@ public abstract class Individu implements IIndividu {
 
 	// VARIABLES D'INSTANCES :
 	
+	
+	private static final long serialVersionUID = -5395433491168309258L;
+
 	/** L'identifiant correspondant au type de l'individu */
 	protected int type;
 	

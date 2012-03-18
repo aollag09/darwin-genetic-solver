@@ -18,6 +18,8 @@ import darwin.modele.Selection;
  */
 public class SelectionElitiste extends Selection{
 
+	private static final long serialVersionUID = -8626955356650933889L;
+
 	public SelectionElitiste(int nbIndividus) throws Exception {
 		super(nbIndividus);
 	}

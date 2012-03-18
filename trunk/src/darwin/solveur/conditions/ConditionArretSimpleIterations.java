@@ -7,6 +7,9 @@ import darwin.modele.ConditionArret;
 
 public class ConditionArretSimpleIterations extends ConditionArret{
 
+
+	private static final long serialVersionUID = -4791732884654986092L;
+	
 	protected int limiteIterations;
 	
 	public ConditionArretSimpleIterations(int limite){

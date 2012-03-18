@@ -1,10 +1,12 @@
 package darwin.interfaces;
 
+import java.io.Serializable;
+
 /**
  * @author Dim && Momo
  *	Permet d'effectuer une selection naturelle sur une génération
  */
-public interface ISelectionNaturelle {
+public interface ISelectionNaturelle extends Serializable {
 	
 	/**
 	 * 

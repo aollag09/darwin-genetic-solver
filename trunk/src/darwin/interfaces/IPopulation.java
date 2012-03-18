@@ -1,5 +1,6 @@
 package darwin.interfaces;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  *	Les individus tout comme la population dont ils font partie peuvent être évalués relativement à
  *	cet environnement.
  */
-public interface IPopulation {
+public interface IPopulation extends Serializable {
 	
 	/**
 	 * 

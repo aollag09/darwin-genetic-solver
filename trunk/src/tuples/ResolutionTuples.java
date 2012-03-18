@@ -26,6 +26,10 @@ public class ResolutionTuples {
 				
 				IConditionArret c = /*new ConditionArretEpsilon(0.05);*/new ConditionArret() {
 					
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
 					int c = 40;
 					double ancienScore = 0;
 					double epsilon = 0.05;

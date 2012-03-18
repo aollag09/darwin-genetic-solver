@@ -12,6 +12,8 @@ public abstract class Caracteristique implements ICaracteristique {
 
 	// VARIABLES D'INSTANCES
 	
+	private static final long serialVersionUID = 5335282627680486390L;
+
 	/** Le BitSet qui code la caractéristique de l'individu */
 	protected BitSet bitSet;
 	

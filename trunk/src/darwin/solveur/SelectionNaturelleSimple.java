@@ -27,6 +27,11 @@ public class SelectionNaturelleSimple extends SelectionNaturelle{
 	// VARIABLES D'INSTANCE
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4319150331265856486L;
+
+	/**
 	 * Le nombre de couple sur lesquel effectuer un crossOver d'une génération à l'autre
 	 * Ce nombre peut être 
 	 */

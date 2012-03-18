@@ -6,6 +6,9 @@ import darwin.interfaces.ICaracteristique;
 
 public class Tuple extends Individu{
 	
+	
+	private static final long serialVersionUID = -4445531036515782238L;
+
 	/**
 	 * Un entier correspondant au type du tuple (définit arbitrairement)
 	 */

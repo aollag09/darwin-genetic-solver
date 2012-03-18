@@ -13,7 +13,9 @@ public class Ville extends Caracteristique {
 	
 	
 	// VARIABLES D'INSTANCES
-	
+
+	private static final long serialVersionUID = 930177974771127068L;
+
 	/** Le numéro de la ville */
 	private int id;
 

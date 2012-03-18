@@ -46,6 +46,7 @@ public class MaitreTSP {
 	public MaitreTSP() {
 		nombreServeurs = getNombreServeurs();
 		bestIndividus = new ArrayList<IIndividu>();
+		System.out.println(nombreServeurs);
 	}
 	
 	public void lancerRequetes(){
@@ -67,8 +68,12 @@ public class MaitreTSP {
 		}
 	}
 	
-	
-	
+	/**
+	 * @param ind, l'individu à récupérer après traitement de la requête
+	 */
+	public void recupererIndividu(IIndividu ind){
+		
+	}
 	
 	public static int getNombreServeurs(){
 		boolean erreur = false;
@@ -84,7 +89,7 @@ public class MaitreTSP {
 				erreur = true;
 			} 
 		}
-		return indexServeur;
+		return indexServeur-1;
 	}
 	
 	

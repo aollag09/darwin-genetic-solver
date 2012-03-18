@@ -5,6 +5,9 @@ import darwin.modele.Environnement;
 
 public class EnvironnementTuples extends Environnement{
 
+
+	private static final long serialVersionUID = -6642289192818570639L;
+	
 	/**
 	 * Tuple objectif
 	 */

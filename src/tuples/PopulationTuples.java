@@ -7,6 +7,9 @@ import darwin.modele.Population;
 
 public class PopulationTuples extends Population{
 
+	
+	private static final long serialVersionUID = -3783372827023763346L;
+	
 	private int tailleTuples;
 	
 	public PopulationTuples(int nbIndividusSouhaites, int tailleTuples, int[] objectif){

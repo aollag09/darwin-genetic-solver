@@ -10,6 +10,9 @@ import darwin.interfaces.IPopulation;
  */
 public abstract class ConditionArret implements IConditionArret {
 
+
+	private static final long serialVersionUID = 1232839489743942231L;
+
 	// VARIABLES D'INSTANCE
 	/**
 	 * Le nombre d'itérations effectuée

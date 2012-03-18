@@ -1,5 +1,6 @@
 package darwin.modele;
 
+
 import darwin.interfaces.ICrossOver;
 import darwin.interfaces.IMutation;
 import darwin.interfaces.IPopulation;
@@ -12,7 +13,7 @@ import darwin.interfaces.ISelectionNaturelle;
  */
 public abstract class SelectionNaturelle implements ISelectionNaturelle {
 
-	// VARIABLES D'INSTANCES
+	private static final long serialVersionUID = 8805079709975023213L;
 
 	/**
 	 * La selection qui selectionne les individus à croiser et à muter

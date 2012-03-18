@@ -9,6 +9,8 @@ public class ConditionArretEpsilonAvecMarge extends ConditionArret {
 
 	// VARAIBLES D'INSANTCES
 	
+	private static final long serialVersionUID = -3405926670257720988L;
+
 	/** 
 	 * La marge, le nombre d'opérations acceptées avec une diférence 
 	 * d'évolution d'epsilon

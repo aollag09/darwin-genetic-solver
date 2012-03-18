@@ -1,5 +1,6 @@
 package darwin.interfaces;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  *	Permet de selectionner un échantillon d'individu parmis une population, et selon
  *	des critères définis.
  */
-public interface ISelection {
+public interface ISelection extends Serializable{
 
 	/**
 	 * 

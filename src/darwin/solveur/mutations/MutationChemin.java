@@ -1,10 +1,14 @@
 package darwin.solveur.mutations;
 
+import java.io.Serializable;
+
 import darwin.interfaces.ICaracteristique;
 import darwin.interfaces.IIndividu;
 import darwin.modele.Mutation;
 
-public class MutationChemin extends Mutation {
+public class MutationChemin extends Mutation implements Serializable {
+
+	private static final long serialVersionUID = -751605708947382909L;
 
 	/**
 	 * Constructeur Simple

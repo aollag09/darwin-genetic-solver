@@ -1,10 +1,12 @@
 package darwin.interfaces;
 
+import java.io.Serializable;
+
 /**
  * @author Momo && Dim
  * 	Permet de muter une ou plusieurs caractéristiques d'un individu en agissant directement sur le bitSet
  */
-public interface IMutation {
+public interface IMutation extends Serializable{
 
 	/**
 	 * 

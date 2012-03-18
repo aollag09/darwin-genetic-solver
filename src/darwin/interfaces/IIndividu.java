@@ -1,5 +1,6 @@
 package darwin.interfaces;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  *	Représente un individu, composé de différentes caractéristiques, tout comme une caractéristique,
  *	un individu est clonable.
  */
-public interface IIndividu extends Cloneable{
+public interface IIndividu extends Cloneable,Serializable{
 
 	/**
 	 * 

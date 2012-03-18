@@ -14,6 +14,8 @@ public abstract class Population implements IPopulation {
 
 	// VARIABLES D'INSTANCES 
 
+	private static final long serialVersionUID = 4152819040013584461L;
+
 	/** La liste de tous les individus */
 	protected List<IIndividu> individus;
 

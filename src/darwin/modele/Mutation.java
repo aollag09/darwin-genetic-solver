@@ -12,6 +12,8 @@ public abstract class Mutation implements IMutation{
 	
 	// VARIABLES D'INSTANCE
 
+	private static final long serialVersionUID = 6548084370950654356L;
+	
 	/**
 	 * La probablité que la mutation ait lieu (comprit entre 0 et 1)
 	 */

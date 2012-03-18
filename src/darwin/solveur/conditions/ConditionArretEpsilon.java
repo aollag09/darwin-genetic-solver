@@ -17,6 +17,8 @@ public class ConditionArretEpsilon extends ConditionArret{
 
 	// VARIALBES D'INSTANCES
 	
+	private static final long serialVersionUID = 2443668627646648241L;
+
 	/**
 	 * Epsilon, la valeur de la condition d'arret epsilon
 	 */

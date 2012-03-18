@@ -22,7 +22,9 @@ import darwin.solveur.Darwin;
  */
 public class ServeurTSP {
 
-	public ServeurTSP(){
+	public ServeurTSP(){};
+	
+	public void lancer(){
 		boolean erreur = false;
 		String adresse = "";
 		/* Chaque serveur doit créer un objet Darwin sur lequel il va fair tourner toutes les mutations ! */
@@ -69,6 +71,7 @@ public class ServeurTSP {
 	}
 	
 	public static void main(String[] args) {
-		new ServeurTSP();
+		ServeurTSP s = new ServeurTSP();
+		s.lancer();
 	}
 }

@@ -18,6 +18,8 @@ import darwin.modele.CrossOver;
  */
 public class CrossOverPointDeCroisement extends CrossOver{
 
+	private static final long serialVersionUID = 4025047928846183403L;
+
 	protected CrossOverPointDeCroisement(double probabilite) throws Exception {
 		super(probabilite);
 	}

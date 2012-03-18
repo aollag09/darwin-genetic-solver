@@ -1,10 +1,12 @@
 package darwin.interfaces;
 
+import java.io.Serializable;
+
 /**
  * @author Momo && Dim
  *	Défini une condition d'arrêt lors de la résolution d'un problème avec l'algorithme génétique
  */
-public interface IConditionArret {
+public interface IConditionArret extends Serializable {
 
 	/**
 	 * 

@@ -1,5 +1,6 @@
 package darwin.interfaces;
 
+import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -7,7 +8,7 @@ import java.rmi.RemoteException;
  * @author Momo && Dim
  * Solveur de l'algorithme génétique
  */
-public interface IDarwin extends Remote {
+public interface IDarwin extends Remote,Serializable {
 
 	/**
 	 * Fixe la condition d'arret

@@ -10,6 +10,8 @@ import darwin.modele.CrossOver;
 
 public class CrossOverChemin extends CrossOver{
 
+	private static final long serialVersionUID = -229364915246378881L;
+
 	public CrossOverChemin(double probablite) throws Exception{
 		super(probablite);
 	}

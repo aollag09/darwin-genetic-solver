@@ -14,6 +14,8 @@ import darwin.modele.Selection;
  */
 public class SelectionTirageAleatoire extends Selection{
 
+	private static final long serialVersionUID = -4452403438838836421L;
+
 	public SelectionTirageAleatoire(int nbIndividus) throws Exception {
 		super(nbIndividus);
 	}

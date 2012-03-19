@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 
 import darwin.interfaces.IConditionArret;
 import darwin.interfaces.IDarwin;
+import darwin.interfaces.IPopulation;
 import darwin.interfaces.ISelectionNaturelle;
 
 
@@ -49,11 +50,12 @@ public class Requete implements Runnable{
 			System.out.print("Serveur "+this.identifiantServeur+" : Lancement de la requête...");
 			IDarwin darwin = (IDarwin)Naming.lookup(adresse);
 			darwin.setSelectionNaturelle(selectionNaturelle);
-//			darwin.setConditionArret(conditionDArret);
-//			IPopulation p = darwin.solve();
-//			System.out.println("Le serveur "+this.identifiantServeur+" a terminé le traitement de se requête " +
-//					"avec pour meilleur évaluation : " +p.evaluerIndividu(p.getBestIndividu()));
-//			
+			darwin.setConditionArret(conditionDArret);
+			IPopulation p = darwin.solve();
+			System.out.println("Le serveur "+this.identifiantServeur+" a terminé le traitement de se requête " +
+					"avec pour meilleur évaluation : " +p.evaluerIndividu(p.getBestIndividu()));
+			
+			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -34,7 +34,7 @@ public class MaitreTSP {
 	}
 	
 	// CONSTANTES :
-	public static final String CHEMIN_RESEAU = "rmi://localhost:1099/Serveur";
+	public static final String CHEMIN_RESEAU = "rmi//localhost/Serveur";
 	
 	//VARIABLES D'INSTANCES : 
 	/** L'ensemble des meilleurs individus récupérés avec les générations sur les serveurs */
@@ -46,7 +46,6 @@ public class MaitreTSP {
 	public MaitreTSP() {
 		nombreServeurs = getNombreServeurs();
 		bestIndividus = new ArrayList<IIndividu>();
-		System.out.println(nombreServeurs);
 	}
 	
 	public void lancerRequetes(){
@@ -72,7 +71,7 @@ public class MaitreTSP {
 	 * @param ind, l'individu à récupérer après traitement de la requête
 	 */
 	public void recupererIndividu(IIndividu ind){
-		
+		this.bestIndividus.add(ind);
 	}
 	
 	public static int getNombreServeurs(){

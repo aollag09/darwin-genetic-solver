@@ -4,6 +4,7 @@ package modele.graphe;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Paint;
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
@@ -24,7 +25,7 @@ import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
  * @author Amaury
  *
  */
-public class Graphe extends SparseMultigraph<Ville, Road>  {
+public class Graphe extends SparseMultigraph<Ville, Road> implements Serializable  {
 	
 	private static final long serialVersionUID = 4211750183598614203L;
 	

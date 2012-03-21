@@ -2,9 +2,13 @@ package modele.graphe;
 
 
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 
-public class Point extends Point2D {
-	
+public class Point extends Point2D implements Serializable {
+
+
+	private static final long serialVersionUID = 6288030958282483768L;
+
 	private double x,y;
 
 	public Point(double x, double y) {
@@ -51,9 +55,9 @@ public class Point extends Point2D {
 	public void setLocation(double x, double y) {
 		this.x = x;
 		this.y = y;
-		
+
 	}
-	
-	
+
+
 
 }

@@ -1,5 +1,7 @@
 package modele.graphe;
 
+import java.io.Serializable;
+
 import tuples.Utiles;
 import darwin.modele.Caracteristique;
 
@@ -9,7 +11,7 @@ import darwin.modele.Caracteristique;
  * @author Amaury
  *
  */
-public class Ville extends Caracteristique {
+public class Ville extends Caracteristique implements Serializable {
 	
 	
 	// VARIABLES D'INSTANCES

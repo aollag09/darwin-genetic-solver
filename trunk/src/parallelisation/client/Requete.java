@@ -5,6 +5,9 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
+import parallelisation.interfaces.IMaitre;
+import parallelisation.interfaces.IRequete;
+
 import darwin.interfaces.IConditionArret;
 import darwin.interfaces.IDarwin;
 import darwin.interfaces.IPopulation;
@@ -17,19 +20,19 @@ import darwin.interfaces.ISelectionNaturelle;
  * @author Amaury
  *
  */
-public class Requete implements Runnable{
+public class Requete implements IRequete{
 
 
 	// VARIABLES D'INSTANCES :
 	private int identifiantServeur;
-	private MaitreTSP maitre;
+	private IMaitre maitre;
 	private Thread thread;
 	private ISelectionNaturelle selectionNaturelle;
 	private IConditionArret conditionDArret;
 	
 	
 	// CONSTRUCTEUR :
-	public Requete(int identifiantServeur, MaitreTSP maitre,
+	public Requete(int identifiantServeur, IMaitre maitre,
 			ISelectionNaturelle selectionNaturelle,
 			IConditionArret conditionDArret) {
 		super();
@@ -54,7 +57,7 @@ public class Requete implements Runnable{
 			IPopulation p = darwin.solve();
 			System.out.println("Le serveur "+this.identifiantServeur+" a terminé le traitement de se requête " +
 					"avec pour meilleur évaluation : " +p.evaluerIndividu(p.getBestIndividu()));
-			
+			maitre.recupererIndividu(p.getBestIndividu());
 			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
@@ -85,12 +88,12 @@ public class Requete implements Runnable{
 	}
 
 
-	public MaitreTSP getMaitre() {
+	public IMaitre getMaitre() {
 		return maitre;
 	}
 
 
-	public void setMaitre(MaitreTSP maitre) {
+	public void setMaitre(IMaitre maitre) {
 		this.maitre = maitre;
 	}
 
@@ -122,6 +125,11 @@ public class Requete implements Runnable{
 
 	public void setConditionDArret(IConditionArret conditionDArret) {
 		this.conditionDArret = conditionDArret;
+	}
+
+
+	@Override
+	public void setIndentifiantServeur() {
 	}
 	
 	

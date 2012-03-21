@@ -1,20 +1,24 @@
 package modele.graphe;
 
+import java.io.Serializable;
 
 
-public class Road {
-	
+
+public class Road implements Serializable {
+
+	private static final long serialVersionUID = 7127152552350459081L;
+
 	/** La distance de la route */
 	private double distance;
-	
+
 	public Road() {
 		distance = 0;
 	}
-	
+
 	public Road(double val){
 		distance = val;
 	}
-	
+
 	public String toString(){
 		return (int)(distance)+"";
 	}
@@ -32,11 +36,11 @@ public class Road {
 	public void setDistance(double distance) {
 		this.distance = distance;
 	}
-	
+
 	public static double getDistance(Ville t1, Ville t2){
 		return Math.sqrt( (t1.getPosition().getX() - t2.getPosition().getX())*(t1.getPosition().getX() - t2.getPosition().getX()) +
 				(t1.getPosition().getY() - t2.getPosition().getY())*(t1.getPosition().getY() - t2.getPosition().getY()));
 	}
-	
+
 
 }

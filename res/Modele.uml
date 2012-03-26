@@ -3,4 +3,38 @@
   <packageImport xmi:id="_fx6GYXLLEeGClJXFt1b9TA">
     <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
   </packageImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_ItmK4HNHEeGK3ctoCW99MA" name="Maitre" clientDependency="_wCmbUHNHEeGK3ctoCW99MA" isAbstract="true">
+    <ownedAttribute xmi:id="_1SyikHNHEeGK3ctoCW99MA" name="requete" type="_jbV_4HNHEeGK3ctoCW99MA" association="_1S86oHNHEeGK3ctoCW99MA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_1SyikXNHEeGK3ctoCW99MA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_1SyiknNHEeGK3ctoCW99MA"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_jkcp0HNNEeGK3ctoCW99MA" name="IPopulation : bestIndividus"/>
+    <ownedAttribute xmi:id="_nYva0HNNEeGK3ctoCW99MA" name="Integer : nombreServeurs"/>
+    <ownedAttribute xmi:id="_psvdwHNNEeGK3ctoCW99MA" name="IConditionArret conditionArret"/>
+    <interfaceRealization xmi:id="_wCmbUHNHEeGK3ctoCW99MA" name="InterfaceRealization0" supplier="_mPsW0HNHEeGK3ctoCW99MA" client="_ItmK4HNHEeGK3ctoCW99MA" contract="_mPsW0HNHEeGK3ctoCW99MA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jbV_4HNHEeGK3ctoCW99MA" name="Requete" clientDependency="_wxQREHNHEeGK3ctoCW99MA">
+    <interfaceRealization xmi:id="_wxQREHNHEeGK3ctoCW99MA" name="InterfaceRealization0" supplier="_ncv_0HNHEeGK3ctoCW99MA" client="_jbV_4HNHEeGK3ctoCW99MA" contract="_ncv_0HNHEeGK3ctoCW99MA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_mPsW0HNHEeGK3ctoCW99MA" name="IMaitre">
+    <ownedOperation xmi:id="_TKsmcHNIEeGK3ctoCW99MA" name="lancerRequetes"/>
+    <ownedOperation xmi:id="_Wz0pQHNIEeGK3ctoCW99MA" name="initialiserRequetes"/>
+    <ownedOperation xmi:id="_YpApQHNIEeGK3ctoCW99MA" name="recupererIndividu"/>
+    <ownedOperation xmi:id="_aWWU0HNIEeGK3ctoCW99MA" name="setConditionArret"/>
+    <ownedOperation xmi:id="_cWNTwHNIEeGK3ctoCW99MA" name="getConditionArret"/>
+    <ownedOperation xmi:id="_eIHWQHNIEeGK3ctoCW99MA" name="getBestIndividus"/>
+    <ownedOperation xmi:id="_hqpB0HNIEeGK3ctoCW99MA" name="ajouterRequete"/>
+    <ownedOperation xmi:id="_jdFP0HNIEeGK3ctoCW99MA" name="operationFinale"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_ncv_0HNHEeGK3ctoCW99MA" name="IRequete"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_ocTYUHNHEeGK3ctoCW99MA" name="IServeur"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_qGb-4HNHEeGK3ctoCW99MA" name="Serveur" clientDependency="_vVoAkHNHEeGK3ctoCW99MA">
+    <interfaceRealization xmi:id="_vVoAkHNHEeGK3ctoCW99MA" name="InterfaceRealization0" supplier="_ocTYUHNHEeGK3ctoCW99MA" client="_qGb-4HNHEeGK3ctoCW99MA" contract="_ocTYUHNHEeGK3ctoCW99MA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_1S86oHNHEeGK3ctoCW99MA" name="" visibility="package" memberEnd="_1S86oXNHEeGK3ctoCW99MA _1SyikHNHEeGK3ctoCW99MA">
+    <ownedEnd xmi:id="_1S86oXNHEeGK3ctoCW99MA" name="maitre" type="_ItmK4HNHEeGK3ctoCW99MA" association="_1S86oHNHEeGK3ctoCW99MA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_1S86onNHEeGK3ctoCW99MA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_1S86o3NHEeGK3ctoCW99MA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
 </uml:Model>

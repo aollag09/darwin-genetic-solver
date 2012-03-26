@@ -3,7 +3,6 @@ package parallelisation.interfaces;
 import java.io.Serializable;
 import java.util.List;
 
-import darwin.interfaces.IConditionArret;
 import darwin.interfaces.IIndividu;
 import darwin.interfaces.IPopulation;
 
@@ -26,9 +25,9 @@ public interface IMaitre extends Serializable {
 	 */
 	void recupererIndividu(IIndividu bestIndividu);	
 	
-	void setConditionArret(IConditionArret condition);
+	void setConditionArret(IConditionArretMaitre condition);
 	
-	IConditionArret getConditionArret();
+	IConditionArretMaitre getConditionArret();
 	
 	IPopulation getBestIndividus();
 	

@@ -1,14 +1,16 @@
 package parallelisation.client;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.rmi.Naming;
 import java.util.ArrayList;
 import java.util.List;
 
-import darwin.interfaces.IConditionArret;
 import darwin.interfaces.IDarwin;
 import darwin.interfaces.IEnvironnement;
 import darwin.interfaces.IIndividu;
 import darwin.interfaces.IPopulation;
+import parallelisation.interfaces.IConditionArretMaitre;
 import parallelisation.interfaces.IMaitre;
 import parallelisation.interfaces.IRequete;
 
@@ -16,9 +18,10 @@ public abstract class Maitre implements IMaitre {
 
 
 	private static final long serialVersionUID = 1L;
+	private static InetAddress address;
 
 	// CONSTANTES :
-	public static final String CHEMIN_RESEAU = "rmi//localhost//Serveur";
+	public static String CHEMIN_RESEAU = "rmi//localhost//Serveur";
 
 	//VARIABLES D'INSTANCES : 
 	
@@ -29,38 +32,44 @@ public abstract class Maitre implements IMaitre {
 	protected int nombreServeurs;
 	
 	/** La condition d'arrêt à vérifier */
-	protected IConditionArret conditonArret;
+	protected IConditionArretMaitre conditonArret;
 	
 	/** La liste de toutes les requêtes */
 	protected List<IRequete> listRequetes;
 	
 	
 	public Maitre() {
+		
+		try {
+			address = InetAddress.getLocalHost();
+			CHEMIN_RESEAU = "rmi//"+address.getHostAddress()+"//Serveur";
+		} catch (UnknownHostException e2) {
+			System.out.println("Erreur dans la récupération de l'adresse réseau locale");
+			e2.printStackTrace();
+		}
+
+		
 		nombreServeurs = getNombreServeurs();
 		listRequetes = new ArrayList<IRequete>();
-		conditonArret = new IConditionArret() {
+		conditonArret = new IConditionArretMaitre() {
 			
-			private static final long serialVersionUID = 1L;
+			private static final long serialVersionUID = -7705378985512001228L;
 
 			@Override
 			public IEnvironnement nextEnvironnement() {
-				return null;
-			}
-			
-			@Override
-			public IConditionArret nextConditionArret() {
-				return null;
-			}
-			
-			@Override
-			public boolean isSatisfied(IPopulation population) {
-				return population.getListIndividus().size() == nombreServeurs;
-			}
-			
-			@Override
-			public int getNombreIteration() {
 				// TODO Auto-generated method stub
-				return 0;
+				return null;
+			}
+			
+			@Override
+			public IConditionArretMaitre nextConditionArret() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public boolean isSatisfied() {
+				return bestIndividus.getTailleSouhaitee() == nombreServeurs;
 			}
 		};
 	}
@@ -106,12 +115,12 @@ public abstract class Maitre implements IMaitre {
 	}
 	
 	@Override
-	public IConditionArret getConditionArret() {
+	public IConditionArretMaitre getConditionArret() {
 		return conditonArret;
 	}
 	
 	@Override
-	public void setConditionArret(IConditionArret condition) {
+	public void setConditionArret(IConditionArretMaitre condition) {
 		this.conditonArret = condition;
 	}
 	

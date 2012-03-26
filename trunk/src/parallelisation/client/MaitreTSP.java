@@ -62,9 +62,9 @@ public class MaitreTSP extends Maitre {
 		/* Pour chacun des serveurs, on envoie une requête */
 		for(int i = 1; i <= nombreServeurs; i++){
 			try{
-			PopulationTSP population = new PopulationTSP(500, environnement);
-			SelectionNaturelleTSP stsp = new SelectionNaturelleTSP(new SelectionTournoi(300), 
-					new SelectionElitiste(500), new CrossOverChemin(0.8), new MutationChemin(0.5),population,10,1);
+			PopulationTSP population = new PopulationTSP(50, environnement);
+			SelectionNaturelleTSP stsp = new SelectionNaturelleTSP(new SelectionTournoi(30), 
+					new SelectionElitiste(50), new CrossOverChemin(0.8), new MutationChemin(0.5),population,10,1);
 			IConditionArret condition = new ConditionArretEpsilonAvecMarge(0.01, 500);
 			Requete r = new Requete(i, this, stsp, condition);
 			this.listRequetes.add(r);

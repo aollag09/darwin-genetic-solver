@@ -1,6 +1,8 @@
 package parallelisation.serveur;
 
+import java.net.InetAddress;
 import java.net.MalformedURLException;
+import java.net.UnknownHostException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 
@@ -22,10 +24,22 @@ import darwin.solveur.Darwin;
 public class Serveur implements IServeur{
 
 	private static final long serialVersionUID = 7210480090025579137L;
+	private static InetAddress address;
+	
+	public static String CHEMIN_RESEAU;
 
 	public Serveur(){};
 	
 	public void lancer(){
+		
+		try {
+			address = InetAddress.getLocalHost();
+			CHEMIN_RESEAU = "rmi//"+address.getHostAddress()+"//Serveur";
+		} catch (UnknownHostException e2) {
+			System.out.println("Erreur dans la récupération de l'adresse réseau locale");
+			e2.printStackTrace();
+		}
+
 		boolean erreur = false;
 		String adresse = "";
 		/* Chaque serveur doit créer un objet Darwin sur lequel il va fair tourner toutes les mutations ! */
@@ -40,7 +54,7 @@ public class Serveur implements IServeur{
 				try { 
 					@SuppressWarnings("unused")
 					IDarwin d = (IDarwin)Naming.lookup(
-									MaitreTSP.CHEMIN_RESEAU+index); 
+									CHEMIN_RESEAU+index); 
 				}catch (Exception e) {
 					bonIndex = index;
 				}
@@ -48,7 +62,7 @@ public class Serveur implements IServeur{
 			}
 			
 			/* On dépose alors sur le serveur l'objet Darwin avec la bonne adresse ! */
-			adresse = MaitreTSP.CHEMIN_RESEAU+bonIndex;
+			adresse = CHEMIN_RESEAU+bonIndex;
 			
 			
 			Naming.rebind(adresse, darwin);

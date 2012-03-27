@@ -13,10 +13,6 @@ public interface IRequete extends Runnable,Serializable {
 	/** Méthode pour récupérer le maitre qui lance toutes les requêtes */
 	public IMaitre getMaitre();
 
-	public int getIdentifiantServeur();
-
-	public void setIndentifiantServeur();
-
 	public ISelectionNaturelle getSelectionNaturelle();
 
 	public IConditionArret getConditionDArret();

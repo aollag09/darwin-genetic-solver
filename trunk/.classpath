@@ -2,22 +2,22 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="/home/dim/Dropbox/tmp/collections-generic-4.01.jar"/>
-	<classpathentry kind="lib" path="/home/dim/Dropbox/tmp/colt-1.2.0.jar"/>
-	<classpathentry kind="lib" path="/home/dim/Dropbox/tmp/concurrent-1.3.4.jar"/>
-	<classpathentry kind="lib" path="/home/dim/Dropbox/tmp/j3d-core-1.3.1.jar"/>
-	<classpathentry kind="lib" path="/home/dim/Dropbox/tmp/jung-3d-2.0.1.jar"/>
-	<classpathentry kind="lib" path="/home/dim/Dropbox/tmp/jung-3d-demos-2.0.1.jar"/>
-	<classpathentry kind="lib" path="/home/dim/Dropbox/tmp/jung-algorithms-2.0.1.jar"/>
-	<classpathentry kind="lib" path="/home/dim/Dropbox/tmp/jung-api-2.0.1.jar"/>
-	<classpathentry kind="lib" path="/home/dim/Dropbox/tmp/jung-graph-impl-2.0.1.jar"/>
-	<classpathentry kind="lib" path="/home/dim/Dropbox/tmp/jung-io-2.0.1.jar"/>
-	<classpathentry kind="lib" path="/home/dim/Dropbox/tmp/jung-jai-2.0.1.jar"/>
-	<classpathentry kind="lib" path="/home/dim/Dropbox/tmp/jung-jai-samples-2.0.1.jar"/>
-	<classpathentry kind="lib" path="/home/dim/Dropbox/tmp/jung-samples-2.0.1.jar"/>
-	<classpathentry kind="lib" path="/home/dim/Dropbox/tmp/jung-visualization-2.0.1.jar"/>
-	<classpathentry kind="lib" path="/home/dim/Dropbox/tmp/stax-api-1.0.1.jar"/>
-	<classpathentry kind="lib" path="/home/dim/Dropbox/tmp/vecmath-1.3.1.jar"/>
-	<classpathentry kind="lib" path="/home/dim/Dropbox/tmp/wstx-asl-3.2.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Amaury/Documents/Prog Java/Graphe Library/collections-generic-4.01.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Amaury/Documents/Prog Java/Graphe Library/colt-1.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Amaury/Documents/Prog Java/Graphe Library/concurrent-1.3.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Amaury/Documents/Prog Java/Graphe Library/j3d-core-1.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Amaury/Documents/Prog Java/Graphe Library/jung-3d-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Amaury/Documents/Prog Java/Graphe Library/jung-3d-demos-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Amaury/Documents/Prog Java/Graphe Library/jung-algorithms-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Amaury/Documents/Prog Java/Graphe Library/jung-api-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Amaury/Documents/Prog Java/Graphe Library/jung-graph-impl-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Amaury/Documents/Prog Java/Graphe Library/jung-io-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Amaury/Documents/Prog Java/Graphe Library/jung-jai-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Amaury/Documents/Prog Java/Graphe Library/jung-jai-samples-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Amaury/Documents/Prog Java/Graphe Library/jung-samples-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Amaury/Documents/Prog Java/Graphe Library/jung-visualization-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Amaury/Documents/Prog Java/Graphe Library/stax-api-1.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Amaury/Documents/Prog Java/Graphe Library/vecmath-1.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Amaury/Documents/Prog Java/Graphe Library/wstx-asl-3.2.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

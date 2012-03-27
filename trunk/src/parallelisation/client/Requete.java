@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import parallelisation.interfaces.IMaitre;
@@ -23,40 +24,48 @@ import darwin.interfaces.ISelectionNaturelle;
  */
 public class Requete implements IRequete{
 
-
+	
 	// VARIABLES D'INSTANCES :
-	private int identifiantServeur;
+	private static final long serialVersionUID = -7573569720186682869L;
 	private IMaitre maitre;
 	private Thread thread;
 	private ISelectionNaturelle selectionNaturelle;
 	private IConditionArret conditionDArret;
-	private Registry registre;
-	
+	private String cheminServeur;
 	
 	// CONSTRUCTEUR :
-	public Requete(int identifiantServeur, IMaitre maitre,
+	public Requete( IMaitre maitre,
 			ISelectionNaturelle selectionNaturelle,
-			IConditionArret conditionDArret, Registry reg) {
+			IConditionArret conditionDArret, String chemin) {
 		super();
-		this.identifiantServeur = identifiantServeur;
 		this.maitre = maitre;
 		this.selectionNaturelle = selectionNaturelle;
 		this.conditionDArret = conditionDArret;
-		this.registre = reg;
 		this.thread = new Thread(this);
+		this.cheminServeur = chemin;
 	}
 
 
 	@Override
 	public void run() {
 		try {
-			String adresse = Maitre.CHEMIN_RESEAU+this.identifiantServeur;
-			System.out.println("Serveur "+this.identifiantServeur+" : Lancement de la requête...");
-			IDarwin darwin = (IDarwin)registre.lookup(adresse);
+			String[] infos = cheminServeur.split("//");
+			String ipAdress = infos[1];
+			String ServeurName = infos[2];
+			System.out.println(cheminServeur+" : Lancement de la requête...");
+			
+			/* Récupération de l'objet Darwin sur le Réseau */
+			Registry registre = LocateRegistry.getRegistry(Maitre.ADRESSE_IP, Integer.parseInt(Maitre.PORT));
+			IDarwin darwin = (IDarwin) registre.lookup(cheminServeur);
+			
+			/* Modification de l'objet */
 			darwin.setSelectionNaturelle(selectionNaturelle);
 			darwin.setConditionArret(conditionDArret);
+			
+			/* Lancement de la résolution */
 			IPopulation p = darwin.solve();
-			System.out.println("Le serveur "+this.identifiantServeur+" a terminé le traitement de se requête " +
+			
+			System.out.println("Le "+cheminServeur+" a terminé le traitement de se requête " +
 					"avec pour meilleur évaluation : " +p.evaluerIndividu(p.getBestIndividu()));
 			maitre.recupererIndividu(p.getBestIndividu());
 			
@@ -78,16 +87,6 @@ public class Requete implements IRequete{
 	public void lancerRequete(){
 		this.thread.start();
 	}
-
-	public int getIdentifiantServeur() {
-		return identifiantServeur;
-	}
-
-
-	public void setIdentifiantServeur(int identifiantServeur) {
-		this.identifiantServeur = identifiantServeur;
-	}
-
 
 	public IMaitre getMaitre() {
 		return maitre;
@@ -128,10 +127,6 @@ public class Requete implements IRequete{
 		this.conditionDArret = conditionDArret;
 	}
 
-
-	@Override
-	public void setIndentifiantServeur() {
-	}
 	
 	
 	

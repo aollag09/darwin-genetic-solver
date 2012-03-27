@@ -163,7 +163,6 @@ public class SelectionNaturelleSimple extends SelectionNaturelle{
 				this.getPopulation().ajouterIndividu(i);
 			}
 		}
-		System.out.println();
 		/* SELECTION */
 		this.getPopulation().setListIndividus(this.selectionFinale.selectionner(this.getPopulation()));
 	}

@@ -1,6 +1,8 @@
 package parallelisation.client;
 
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+
 import modele.genetique.tsp.EnvironnementTSP;
 import modele.genetique.tsp.PopulationTSP;
 import modele.genetique.tsp.SelectionNaturelleTSP;
@@ -30,8 +32,9 @@ public class MaitreTSP extends Maitre {
 
 	public static void main(String[] args) {
 		MaitreTSP m = new MaitreTSP();
-		m.initialiserRequetes();
-		m.lancerRequetes();
+		System.out.println(m.toString());
+		//m.initialiserRequetes();
+		//m.lancerRequetes();
 	}
 	
 	
@@ -60,13 +63,19 @@ public class MaitreTSP extends Maitre {
 		/* On crée d'abord l'environement toujours indentique */
 		EnvironnementTSP environnement = new EnvironnementTSP();
 		/* Pour chacun des serveurs, on envoie une requête */
-		for(int i = 1; i <= nombreServeurs; i++){
+		int taille = 0;
+		try {
+			taille = listServeurs.size();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
+		for(int i = 1; i <= taille; i++){
 			try{
 			PopulationTSP population = new PopulationTSP(50, environnement);
 			SelectionNaturelleTSP stsp = new SelectionNaturelleTSP(new SelectionTournoi(30), 
 					new SelectionElitiste(50), new CrossOverChemin(0.8), new MutationChemin(0.5),population,10,1);
 			IConditionArret condition = new ConditionArretEpsilonAvecMarge(0.01, 500);
-			Requete r = new Requete(i, this, stsp, condition);
+			Requete r = new Requete(i, this, stsp, condition,registre);
 			this.listRequetes.add(r);
 			}
 			catch (Exception e) {
@@ -78,7 +87,27 @@ public class MaitreTSP extends Maitre {
 
 	
 	
-	
+	public String toString(){
+		String toReturn = "";
+		try {
+			java.rmi.registry.LocateRegistry.createRegistry(1108);
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		java.rmi.registry.Registry r;
+		try {
+			r = LocateRegistry.getRegistry(Maitre.ADRESSE_IP, 1099);
+			toReturn += "La liste des objets sur le serveur"+"\n";
+			String[] name = r.list();
+			for(String s : name)
+				toReturn += s +"\n";
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return toReturn;
+	}
 	
 
 }

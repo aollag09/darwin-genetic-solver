@@ -1,0 +1,8 @@
+
+1°/ Lancer le RegistreServeur, le registre qui va enregistrer tous les serveurs disponnibles et connectés
+sur le réseau en attente de requête
+
+2°/ On lance tous les serveurs qui vont envoyé leur chemin au RegistreServeur
+
+3°/ On lance alors le MAitre TSP qui va lanver des requêtes sur les objets Darwin de chacun des 
+Serveurs.

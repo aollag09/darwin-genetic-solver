@@ -37,14 +37,38 @@ public class Serveur implements IServeur{
 			IDarwin darwin = new Darwin();
 
 			/* On récupère le registre sur le réseau */
-			Registry registre;
-			registre = LocateRegistry.getRegistry(Maitre.ADRESSE_IP,Integer.parseInt(Maitre.PORT));
+			Registry registre = null;
+			
+			/* On récupére l'adresse IP */
+			String ipAdresse = null;
+			try {
+				ipAdresse = InetAddress.getLocalHost().getHostAddress().toString();
+			} catch (UnknownHostException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			/* Récupération ou création du registre sur le local */
+			try{
+				registre = LocateRegistry.createRegistry(Integer.parseInt(Maitre.PORT));
+			}catch (Exception e) {
+				/* Si on ne peut pas créer le registrery, c'est qu'il existe déjà */
+				/* On cherche donc à le récupérer */
+				registre = LocateRegistry.getRegistry(ipAdresse,Integer.parseInt(Maitre.PORT));
+			}
+
 
 			/* On dépose alors sur le serveur l'objet Darwin avec la bonne adresse ! */
-			adresse = Maitre.CHEMIN_RESEAU+ (registre.list().length+1);
-			
+			adresse ="rmi//"+ipAdresse+"//Serveur"+ (registre.list().length+1);
 			/* Ajout de l'objet sur le réseau */
 			Naming.rebind(adresse, darwin);
+
+
+			/* On ajoute le serveur ajouté à la liste des serveurs disponnibles */
+			Registry registreServeur = null;
+			try{
+				
+			}
 
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
@@ -59,13 +83,7 @@ public class Serveur implements IServeur{
 	}
 
 	public static void main(String[] args) {
-		try {
-			System.out.println(LocateRegistry.getRegistry());
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//Serveur s = new Serveur();
-		//s.lancer();
+		Serveur s = new Serveur();
+		s.lancer();
 	}
 }

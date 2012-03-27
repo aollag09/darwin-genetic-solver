@@ -1,15 +1,11 @@
 package parallelisation.client;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.List;
 
-import darwin.interfaces.IDarwin;
 import darwin.interfaces.IEnvironnement;
 import darwin.interfaces.IIndividu;
 import darwin.interfaces.IPopulation;
@@ -27,10 +23,12 @@ public abstract class Maitre implements IMaitre {
 	// CONSTANTES :
 	
 	
-	public static String ADRESSE_IP = "localhost";
+	public static String ADRESSE_IP = "172.17.2.13";
 	public static String PORT = "1099";
 	public static String CHEMIN_RESEAU = "rmi//"+ADRESSE_IP+":"+PORT+"//Serveur";
-	public static String CHEMIN_RESEAU_REGISTRE_SERVEURS = "rmi//"+ADRESSE_IP+":"+PORT+"//Liste";
+	public static String CHEMIN_RESEAU_REGISTRE = "rmi//"+ADRESSE_IP;
+	public static String CHEMIN_RESEAU_REGISTRE_WITH_PORT = "rmi//"+ADRESSE_IP+":"+PORT;
+	public static String CHEMIN_RESEAU_REGISTRE_SERVEURS = CHEMIN_RESEAU_REGISTRE_WITH_PORT + "//Liste";
 
 	//VARIABLES D'INSTANCES : 
 	

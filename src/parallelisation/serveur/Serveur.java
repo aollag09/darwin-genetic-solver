@@ -9,7 +9,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import parallelisation.client.Maitre;
-import parallelisation.client.MaitreTSP;
+import parallelisation.interfaces.IListeServeur;
 import parallelisation.interfaces.IServeur;
 
 
@@ -18,8 +18,8 @@ import darwin.solveur.Darwin;
 
 /**
  * 
- * Cette classe permet de crï¿½er un serveur sur lequel on peut donner diffï¿½rentes commandes concernant 
- * l'algorithme gï¿½nï¿½tique du TSP.
+ * Cette classe permet de créer un serveur sur lequel on peut donner différentes commandes concernant 
+ * l'algorithme génétique du TSP.
  * 
  * @author Amaury
  *
@@ -33,44 +33,47 @@ public class Serveur implements IServeur{
 	public void lancer(){
 		String adresse = "";
 		try{
-			/* L'objet que l'on va mettre sur le rï¿½seau */
+			/* L'objet que l'on va mettre sur le réseau */
 			IDarwin darwin = new Darwin();
 
-			/* On rï¿½cupï¿½re le registre sur le rï¿½seau */
+			/* On récupère le registre sur le réseau */
 			Registry registre = null;
 			
-			/* On rï¿½cupï¿½re l'adresse IP */
+			/* On récupére l'adresse IP */
 			String ipAdresse = null;
 			try {
 				ipAdresse = InetAddress.getLocalHost().getHostAddress().toString();
 			} catch (UnknownHostException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			
-			/* Rï¿½cupï¿½ration ou crï¿½ation du registre sur le local */
+			/* Récupération ou création du registre sur le local */
 			try{
 				registre = LocateRegistry.createRegistry(Integer.parseInt(Maitre.PORT));
 			}catch (Exception e) {
-				/* Si on ne peut pas crï¿½er le registrery, c'est qu'il existe dï¿½jï¿½ */
-				/* On cherche donc ï¿½ le rï¿½cupï¿½rer */
+				/* Si on ne peut pas créer le registrery, c'est qu'il existe déjà */
+				/* On cherche donc à le récupérer */
 				registre = LocateRegistry.getRegistry(ipAdresse,Integer.parseInt(Maitre.PORT));
 			}
 
 
-			/* On dï¿½pose alors sur le serveur l'objet Darwin avec la bonne adresse ! */
+			/* On dépose alors sur le serveur l'objet Darwin avec la bonne adresse ! */
 			adresse ="rmi//"+ipAdresse+"//Serveur"+ (registre.list().length+1);
-			/* Ajout de l'objet sur le rï¿½seau */
+			/* Ajout de l'objet sur le réseau */
 			Naming.rebind(adresse, darwin);
 
 
-			/* On ajoute le serveur ajoutï¿½ ï¿½ la liste des serveurs disponnibles */
+			/* On ajoute le serveur ajouté à la liste des serveurs disponnibles */
 			Registry registreServeur = null;
 			try{
-				
+				registreServeur = LocateRegistry.getRegistry(Maitre.ADRESSE_IP, Integer.parseInt(Maitre.PORT));
+				IListeServeur list = (IListeServeur) registreServeur.lookup(Maitre.CHEMIN_RESEAU_REGISTRE_SERVEURS);
+				list.ajouterServeur(adresse);
 			}catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
+				System.out.println("Erreur dans la récupération du registre de serveur du maitre");
 			}
+			
 
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
@@ -78,10 +81,10 @@ public class Serveur implements IServeur{
 			e.printStackTrace();
 		}
 
-		System.out.println("Serveur lancï¿½ sur : "+adresse);
-		System.out.println("En attente de requï¿½te ...");
+		System.out.println("Serveur lancé sur : "+adresse);
+		System.out.println("En attente de requête ...");
 
-		/* Le serveur est prï¿½s ï¿½ traiter vos requï¿½tes */
+		/* Le serveur est près à traiter vos requêtes */
 	}
 
 	public static void main(String[] args) {

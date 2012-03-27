@@ -5,7 +5,10 @@ import java.net.MalformedURLException;
 import java.net.UnknownHostException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
+import parallelisation.client.Maitre;
 import parallelisation.client.MaitreTSP;
 import parallelisation.interfaces.IServeur;
 
@@ -24,70 +27,45 @@ import darwin.solveur.Darwin;
 public class Serveur implements IServeur{
 
 	private static final long serialVersionUID = 7210480090025579137L;
-	private static InetAddress address;
-	
-	public static String CHEMIN_RESEAU;
 
 	public Serveur(){};
-	
-	public void lancer(){
-		
-		try {
-			address = InetAddress.getLocalHost();
-			CHEMIN_RESEAU = "rmi//"+address.getHostAddress()+"//Serveur";
-		} catch (UnknownHostException e2) {
-			System.out.println("Erreur dans la récupération de l'adresse réseau locale");
-			e2.printStackTrace();
-		}
 
-		boolean erreur = false;
+	public void lancer(){
 		String adresse = "";
-		/* Chaque serveur doit créer un objet Darwin sur lequel il va fair tourner toutes les mutations ! */
-		IDarwin darwin;
-		try {
-			darwin = new Darwin();			
-			
-			/* On cherche à déposer cet objet sur le réseau, en trouvant le dernier disponnible */
-			int bonIndex = 0;
-			int index = 1;
-			while(bonIndex == 0){
-				try { 
-					@SuppressWarnings("unused")
-					IDarwin d = (IDarwin)Naming.lookup(
-									CHEMIN_RESEAU+index); 
-				}catch (Exception e) {
-					bonIndex = index;
-				}
-				index ++;
-			}
-			
+		try{
+			/* L'objet que l'on va mettre sur le réseau */
+			IDarwin darwin = new Darwin();
+
+			/* On récupère le registre sur le réseau */
+			Registry registre;
+			registre = LocateRegistry.getRegistry(Maitre.ADRESSE_IP,Integer.parseInt(Maitre.PORT));
+
 			/* On dépose alors sur le serveur l'objet Darwin avec la bonne adresse ! */
-			adresse = CHEMIN_RESEAU+bonIndex;
+			adresse = Maitre.CHEMIN_RESEAU+ (registre.list().length+1);
 			
-			
+			/* Ajout de l'objet sur le réseau */
 			Naming.rebind(adresse, darwin);
-			
+
 		} catch (RemoteException e1) {
-			erreur = true;
 			e1.printStackTrace();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
-			erreur = true;
 		}
-		
-	
-		if( ! erreur){
-			System.out.println("Serveur lancé sur : "+adresse);
-			System.out.println("En attente de requête ...");
-		}else{
-			System.out.println("Assurez vous d'avoir bien lancé le rmiregistry dans le dossier bin de Darwin avant de créer un Serveur");
-			System.out.println("Sinon le problème vient du fait que l'adresse sur laquelle vous souhaitez lancer la JVM n'est pas disponnible");	
-		}
+
+		System.out.println("Serveur lancé sur : "+adresse);
+		System.out.println("En attente de requête ...");
+
 		/* Le serveur est près à traiter vos requêtes */
 	}
-	
+
 	public static void main(String[] args) {
-		Serveur s = new Serveur();
-		s.lancer();
+		try {
+			System.out.println(LocateRegistry.getRegistry());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//Serveur s = new Serveur();
+		//s.lancer();
 	}
 }

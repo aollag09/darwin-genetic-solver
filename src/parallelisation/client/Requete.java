@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.Registry;
 
 import parallelisation.interfaces.IMaitre;
 import parallelisation.interfaces.IRequete;
@@ -29,18 +30,19 @@ public class Requete implements IRequete{
 	private Thread thread;
 	private ISelectionNaturelle selectionNaturelle;
 	private IConditionArret conditionDArret;
+	private Registry registre;
 	
 	
 	// CONSTRUCTEUR :
 	public Requete(int identifiantServeur, IMaitre maitre,
 			ISelectionNaturelle selectionNaturelle,
-			IConditionArret conditionDArret) {
+			IConditionArret conditionDArret, Registry reg) {
 		super();
 		this.identifiantServeur = identifiantServeur;
 		this.maitre = maitre;
 		this.selectionNaturelle = selectionNaturelle;
 		this.conditionDArret = conditionDArret;
-		
+		this.registre = reg;
 		this.thread = new Thread(this);
 	}
 
@@ -48,10 +50,9 @@ public class Requete implements IRequete{
 	@Override
 	public void run() {
 		try {
-			System.out.println("");
-			String adresse = MaitreTSP.CHEMIN_RESEAU+this.identifiantServeur;
-			System.out.print("Serveur "+this.identifiantServeur+" : Lancement de la requête...");
-			IDarwin darwin = (IDarwin)Naming.lookup(adresse);
+			String adresse = Maitre.CHEMIN_RESEAU+this.identifiantServeur;
+			System.out.println("Serveur "+this.identifiantServeur+" : Lancement de la requête...");
+			IDarwin darwin = (IDarwin)registre.lookup(adresse);
 			darwin.setSelectionNaturelle(selectionNaturelle);
 			darwin.setConditionArret(conditionDArret);
 			IPopulation p = darwin.solve();

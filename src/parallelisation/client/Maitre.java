@@ -3,6 +3,9 @@ package parallelisation.client;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,25 +14,31 @@ import darwin.interfaces.IEnvironnement;
 import darwin.interfaces.IIndividu;
 import darwin.interfaces.IPopulation;
 import parallelisation.interfaces.IConditionArretMaitre;
+import parallelisation.interfaces.IListeServeur;
 import parallelisation.interfaces.IMaitre;
 import parallelisation.interfaces.IRequete;
+import parallelisation.registry.ListeServeur;
 
 public abstract class Maitre implements IMaitre {
 
 
 	private static final long serialVersionUID = 1L;
-	private static InetAddress address;
 
 	// CONSTANTES :
-	public static String CHEMIN_RESEAU = "rmi//localhost//Serveur";
+	
+	
+	public static String ADRESSE_IP = "localhost";
+	public static String PORT = "1099";
+	public static String CHEMIN_RESEAU = "rmi//"+ADRESSE_IP+":"+PORT+"//Serveur";
+	public static String CHEMIN_RESEAU_REGISTRE_SERVEURS = "rmi//"+ADRESSE_IP+":"+PORT+"//Liste";
 
 	//VARIABLES D'INSTANCES : 
 	
 	/** L'ensemble des meilleurs individus récupérés avec les générations sur les serveurs */
 	protected IPopulation bestIndividus;
 	
-	/** Le nombre de serveurs disponnibles */
-	protected int nombreServeurs;
+	/** La liste des chemin réseau de tous les serveurs actuellement lancés */
+	protected IListeServeur listServeurs;
 	
 	/** La condition d'arrêt à vérifier */
 	protected IConditionArretMaitre conditonArret;
@@ -37,19 +46,17 @@ public abstract class Maitre implements IMaitre {
 	/** La liste de toutes les requêtes */
 	protected List<IRequete> listRequetes;
 	
+	/** Le registre sur le réseau */
+	protected Registry registre;
+	
 	
 	public Maitre() {
 		
 		try {
-			address = InetAddress.getLocalHost();
-			CHEMIN_RESEAU = "rmi//"+address.getHostAddress()+"//Serveur";
-		} catch (UnknownHostException e2) {
-			System.out.println("Erreur dans la récupération de l'adresse réseau locale");
-			e2.printStackTrace();
-		}
 
-		
-		nombreServeurs = getNombreServeurs();
+		registre = LocateRegistry.getRegistry(Maitre.ADRESSE_IP,Integer.parseInt(Maitre.PORT));
+		/* On récupère la liste des serveurs sur le registre local */ 
+		listServeurs = new ListeServeur();
 		listRequetes = new ArrayList<IRequete>();
 		conditonArret = new IConditionArretMaitre() {
 			
@@ -69,9 +76,18 @@ public abstract class Maitre implements IMaitre {
 			
 			@Override
 			public boolean isSatisfied() {
-				return bestIndividus.getTailleSouhaitee() == nombreServeurs;
+				try {
+					return bestIndividus.getTailleSouhaitee() == listServeurs.size();
+				} catch (RemoteException e) {
+					e.printStackTrace();
+					return false;
+				}
 			}
 		};
+		
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 
@@ -82,22 +98,7 @@ public abstract class Maitre implements IMaitre {
 		this.bestIndividus.ajouterIndividu(ind);
 	}
 
-	public static int getNombreServeurs(){
-		boolean erreur = false;
-		int indexServeur = 0;
-		while( ! erreur ){
-			indexServeur ++;
-			try { 
-				String adresse = CHEMIN_RESEAU+indexServeur;
-				@SuppressWarnings("unused")
-				IDarwin darwin = (IDarwin)Naming.lookup(adresse); 
-			}
-			catch (Exception e) { 
-				erreur = true;
-			} 
-		}
-		return indexServeur-1;
-	}
+
 	
 	@Override
 	public List<IRequete> getListRequete() {

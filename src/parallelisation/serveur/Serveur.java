@@ -18,8 +18,8 @@ import darwin.solveur.Darwin;
 
 /**
  * 
- * Cette classe permet de créer un serveur sur lequel on peut donner différentes commandes concernant 
- * l'algorithme génétique du TSP.
+ * Cette classe permet de crï¿½er un serveur sur lequel on peut donner diffï¿½rentes commandes concernant 
+ * l'algorithme gï¿½nï¿½tique du TSP.
  * 
  * @author Amaury
  *
@@ -33,13 +33,13 @@ public class Serveur implements IServeur{
 	public void lancer(){
 		String adresse = "";
 		try{
-			/* L'objet que l'on va mettre sur le réseau */
+			/* L'objet que l'on va mettre sur le rï¿½seau */
 			IDarwin darwin = new Darwin();
 
-			/* On récupère le registre sur le réseau */
+			/* On rï¿½cupï¿½re le registre sur le rï¿½seau */
 			Registry registre = null;
 			
-			/* On récupére l'adresse IP */
+			/* On rï¿½cupï¿½re l'adresse IP */
 			String ipAdresse = null;
 			try {
 				ipAdresse = InetAddress.getLocalHost().getHostAddress().toString();
@@ -48,23 +48,23 @@ public class Serveur implements IServeur{
 				e1.printStackTrace();
 			}
 			
-			/* Récupération ou création du registre sur le local */
+			/* Rï¿½cupï¿½ration ou crï¿½ation du registre sur le local */
 			try{
 				registre = LocateRegistry.createRegistry(Integer.parseInt(Maitre.PORT));
 			}catch (Exception e) {
-				/* Si on ne peut pas créer le registrery, c'est qu'il existe déjà */
-				/* On cherche donc à le récupérer */
+				/* Si on ne peut pas crï¿½er le registrery, c'est qu'il existe dï¿½jï¿½ */
+				/* On cherche donc ï¿½ le rï¿½cupï¿½rer */
 				registre = LocateRegistry.getRegistry(ipAdresse,Integer.parseInt(Maitre.PORT));
 			}
 
 
-			/* On dépose alors sur le serveur l'objet Darwin avec la bonne adresse ! */
+			/* On dï¿½pose alors sur le serveur l'objet Darwin avec la bonne adresse ! */
 			adresse ="rmi//"+ipAdresse+"//Serveur"+ (registre.list().length+1);
-			/* Ajout de l'objet sur le réseau */
+			/* Ajout de l'objet sur le rï¿½seau */
 			Naming.rebind(adresse, darwin);
 
 
-			/* On ajoute le serveur ajouté à la liste des serveurs disponnibles */
+			/* On ajoute le serveur ajoutï¿½ ï¿½ la liste des serveurs disponnibles */
 			Registry registreServeur = null;
 			try{
 				
@@ -78,10 +78,10 @@ public class Serveur implements IServeur{
 			e.printStackTrace();
 		}
 
-		System.out.println("Serveur lancé sur : "+adresse);
-		System.out.println("En attente de requête ...");
+		System.out.println("Serveur lancï¿½ sur : "+adresse);
+		System.out.println("En attente de requï¿½te ...");
 
-		/* Le serveur est près à traiter vos requêtes */
+		/* Le serveur est prï¿½s ï¿½ traiter vos requï¿½tes */
 	}
 
 	public static void main(String[] args) {

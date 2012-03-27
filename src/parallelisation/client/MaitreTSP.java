@@ -32,9 +32,8 @@ public class MaitreTSP extends Maitre {
 
 	public static void main(String[] args) {
 		MaitreTSP m = new MaitreTSP();
-		System.out.println(m.toString());
-		//m.initialiserRequetes();
-		//m.lancerRequetes();
+		m.initialiserRequetes();
+		m.lancerRequetes();
 	}
 	
 	
@@ -63,24 +62,22 @@ public class MaitreTSP extends Maitre {
 		/* On crée d'abord l'environement toujours indentique */
 		EnvironnementTSP environnement = new EnvironnementTSP();
 		/* Pour chacun des serveurs, on envoie une requête */
-		int taille = 0;
 		try {
-			taille = listServeurs.size();
-		} catch (RemoteException e1) {
-			e1.printStackTrace();
-		}
-		for(int i = 1; i <= taille; i++){
-			try{
-			PopulationTSP population = new PopulationTSP(50, environnement);
-			SelectionNaturelleTSP stsp = new SelectionNaturelleTSP(new SelectionTournoi(30), 
-					new SelectionElitiste(50), new CrossOverChemin(0.8), new MutationChemin(0.5),population,10,1);
-			IConditionArret condition = new ConditionArretEpsilonAvecMarge(0.01, 500);
-			Requete r = new Requete(i, this, stsp, condition,registre);
-			this.listRequetes.add(r);
+			for(String chemin : listServeurs.getServeurs()){
+				try{
+				PopulationTSP population = new PopulationTSP(50, environnement);
+				SelectionNaturelleTSP stsp = new SelectionNaturelleTSP(new SelectionTournoi(30), 
+						new SelectionElitiste(50), new CrossOverChemin(0.8), new MutationChemin(0.5),population,10,1);
+				IConditionArret condition = new ConditionArretEpsilonAvecMarge(0.01, 500);
+				Requete r = new Requete( this, stsp, condition, chemin);
+				this.listRequetes.add(r);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
 		}
 		
 	}

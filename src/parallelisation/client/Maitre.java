@@ -51,10 +51,9 @@ public abstract class Maitre implements IMaitre {
 	public Maitre() {
 		
 		try {
-
 		registre = LocateRegistry.getRegistry(Maitre.ADRESSE_IP,Integer.parseInt(Maitre.PORT));
 		/* On récupère la liste des serveurs sur le registre local */ 
-		listServeurs = new ListeServeur();
+		listServeurs = (IListeServeur) registre.lookup(Maitre.CHEMIN_RESEAU_REGISTRE_SERVEURS);
 		listRequetes = new ArrayList<IRequete>();
 		conditonArret = new IConditionArretMaitre() {
 			

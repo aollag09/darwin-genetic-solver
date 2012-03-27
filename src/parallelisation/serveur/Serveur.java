@@ -27,6 +27,8 @@ import darwin.solveur.Darwin;
 public class Serveur implements IServeur{
 
 	private static final long serialVersionUID = 7210480090025579137L;
+	
+	public static String ADRESSE_IP_SUR_RESEAU = "";
 
 	public Serveur(){};
 
@@ -41,11 +43,7 @@ public class Serveur implements IServeur{
 			
 			/* On récupére l'adresse IP */
 			String ipAdresse = null;
-			try {
-				ipAdresse = InetAddress.getLocalHost().getHostAddress().toString();
-			} catch (UnknownHostException e1) {
-				e1.printStackTrace();
-			}
+			ipAdresse = ADRESSE_IP_SUR_RESEAU;
 			
 			/* Récupération ou création du registre sur le local */
 			try{

@@ -68,6 +68,8 @@ public class Serveur implements IServeur{
 			Registry registreServeur = null;
 			try{
 				
+			}catch (Exception e) {
+				// TODO: handle exception
 			}
 
 		} catch (RemoteException e1) {

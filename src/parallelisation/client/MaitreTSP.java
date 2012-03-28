@@ -12,6 +12,7 @@ import darwin.solveur.conditions.ConditionArretEpsilonAvecMarge;
 import darwin.solveur.crossovers.CrossOverChemin;
 import darwin.solveur.mutations.MutationChemin;
 import darwin.solveur.selections.SelectionElitiste;
+import darwin.solveur.selections.SelectionRoulette;
 import darwin.solveur.selections.SelectionTournoi;
 
 
@@ -35,7 +36,6 @@ public class MaitreTSP extends Maitre {
 		m.initialiserRequetes();
 		m.lancerRequetes();
 	}
-	
 	
 
 	public MaitreTSP() {
@@ -65,11 +65,12 @@ public class MaitreTSP extends Maitre {
 		try {
 			for(String chemin : listServeurs.getServeurs()){
 				try{
-				PopulationTSP population = new PopulationTSP(50, environnement);
-				SelectionNaturelleTSP stsp = new SelectionNaturelleTSP(new SelectionTournoi(30), 
-						new SelectionElitiste(50), new CrossOverChemin(0.8), new MutationChemin(0.5),population,10,1);
+				PopulationTSP population = new PopulationTSP(100, environnement);
+				SelectionNaturelleTSP stsp = new SelectionNaturelleTSP(new SelectionTournoi(70), 
+						new SelectionRoulette(100), new CrossOverChemin(0.8), new MutationChemin(0.7),population,10,1);
 				IConditionArret condition = new ConditionArretEpsilonAvecMarge(0.01, 500);
 				Requete r = new Requete( this, stsp, condition, chemin);
+				System.out.println("Population pour "+chemin+" intialisée");
 				this.listRequetes.add(r);
 				}
 				catch (Exception e) {

@@ -1,8 +1,6 @@
 package parallelisation.serveur;
 
-import java.net.InetAddress;
 import java.net.MalformedURLException;
-import java.net.UnknownHostException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -28,7 +26,7 @@ public class Serveur implements IServeur{
 
 	private static final long serialVersionUID = 7210480090025579137L;
 	
-	public static String ADRESSE_IP_SUR_RESEAU = "";
+	public static final String ADRESSE_IP_SUR_RESEAU = Maitre.ADRESSE_IP;
 
 	public Serveur(){};
 

@@ -13,7 +13,6 @@ import parallelisation.interfaces.IConditionArretMaitre;
 import parallelisation.interfaces.IListeServeur;
 import parallelisation.interfaces.IMaitre;
 import parallelisation.interfaces.IRequete;
-import parallelisation.registry.ListeServeur;
 
 public abstract class Maitre implements IMaitre {
 
@@ -23,7 +22,7 @@ public abstract class Maitre implements IMaitre {
 	// CONSTANTES :
 	
 	
-	public static String ADRESSE_IP = "172.17.2.13";
+	public static String ADRESSE_IP = "localhost";
 	public static String PORT = "1099";
 	public static String CHEMIN_RESEAU = "rmi//"+ADRESSE_IP+":"+PORT+"//Serveur";
 	public static String CHEMIN_RESEAU_REGISTRE = "rmi//"+ADRESSE_IP;

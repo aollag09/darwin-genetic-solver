@@ -84,8 +84,6 @@ public class Ville extends Caracteristique implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Ville other = (Ville) obj;
-		if (id != other.id)
-			return false;
 		if (position == null) {
 			if (other.position != null)
 				return false;

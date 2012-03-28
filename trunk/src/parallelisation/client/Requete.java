@@ -55,7 +55,7 @@ public class Requete implements IRequete{
 			System.out.println(cheminServeur+" : Lancement de la requête...");
 			
 			/* Récupération de l'objet Darwin sur le Réseau */
-			Registry registre = LocateRegistry.getRegistry(Maitre.ADRESSE_IP, Integer.parseInt(Maitre.PORT));
+			Registry registre = LocateRegistry.getRegistry(ipAdress, Integer.parseInt(Maitre.PORT));
 			IDarwin darwin = (IDarwin) registre.lookup(cheminServeur);
 			
 			/* Modification de l'objet */

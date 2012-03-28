@@ -1,0 +1,6 @@
+Trouver l'adresse IP :
+KDE :
+Menu / Configuration /Centre de configuration 
+et dans la console effectuer un 
+traceroute du "nom de l'hote"
+

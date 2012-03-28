@@ -20,7 +20,7 @@ public class Chemin extends Individu{
 
 	private static final long serialVersionUID = 3767055213227100312L;
 
-
+	
 	public Chemin(Individu i) {
 		super(i);
 	}

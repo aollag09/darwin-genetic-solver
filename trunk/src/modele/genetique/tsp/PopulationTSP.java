@@ -5,8 +5,11 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.JPanel;
+
+import org.apache.commons.collections15.ListUtils;
 
 import darwin.interfaces.ICaracteristique;
 import darwin.interfaces.IEnvironnement;
@@ -24,6 +27,16 @@ public class PopulationTSP extends Population {
         
 	private static final long serialVersionUID = -4816987600805972375L;
 
+		public static void main(String[] args) throws RemoteException {
+			EnvironnementTSP e = new EnvironnementTSP();
+			PopulationTSP p = new PopulationTSP(10, e);
+			PopulationTSPFactory factory = new PopulationTSPFactory(e);
+			ArrayList<IIndividu> ii = (factory.genererPopulationSimilitudeRestrainte(0.1, 20));
+			
+			for(IIndividu ivi : ii)
+				System.out.println(ivi);
+		}
+	
 		public PopulationTSP() throws RemoteException {
                 super();
         }
@@ -40,8 +53,8 @@ public class PopulationTSP extends Population {
                 super();
                 this.nombreIndividusSouhaite = nombreIndividus;
                 this.environnement = environnement;
-                this.individus = new ArrayList<IIndividu>();
-                generer();
+                PopulationTSPFactory factory = new PopulationTSPFactory(this.environnement);
+                this.individus =  (factory.genererPopulationSimilitudeRestrainte(0.0001, 20));
         }
 
         
@@ -99,4 +112,11 @@ public class PopulationTSP extends Population {
                 }
                 return s;
         }
+        
+        
+        public double distanceEntrePopulation(){
+        	return 0;
+        }
+        
+      
 }

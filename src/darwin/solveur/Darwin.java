@@ -35,7 +35,7 @@ public class Darwin extends UnicastRemoteObject implements IDarwin, Serializable
 		this.selectionNaturelle = selectionNaturelle;
 		this.setConditionArret(conditionArret);
 		this.afficherChaqueGeneration(false);
-		this.afficherChaqueScore(false);
+		this.afficherChaqueScore(true);
 		this.afficherIterations(true);
 	}
 	
@@ -44,7 +44,7 @@ public class Darwin extends UnicastRemoteObject implements IDarwin, Serializable
 	 */
 	public Darwin() throws RemoteException {
 		this.afficherChaqueGeneration(false);
-		this.afficherChaqueScore(false);
+		this.afficherChaqueScore(true);
 		this.afficherIterations(true);
 	}
 	

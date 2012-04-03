@@ -22,7 +22,7 @@ public class ConditionArretScoreMinimum extends ConditionArret{
 	 * @param scroreMin la score miminum à atteindre
 	 */
 	public ConditionArretScoreMinimum(double scroreMin, double delta) {
-		this.setScoreMinimum(scroreMin);
+		scoreMinimum = scroreMin;
 		this.delta = delta;
 	}
 	

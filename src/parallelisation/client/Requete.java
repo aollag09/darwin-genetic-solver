@@ -6,6 +6,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.sql.Time;
 
 import parallelisation.interfaces.IMaitre;
 import parallelisation.interfaces.IRequete;
@@ -49,13 +50,13 @@ public class Requete implements IRequete{
 	@Override
 	public void run() {
 		try {
+			long tempsDepart =  System.currentTimeMillis();
 			String[] infos = cheminServeur.split("//");
 			String ipAdress = infos[1];
 			String ServeurName = infos[2];
 			System.out.println(cheminServeur+" : Lancement de la requête...");
-			
 			/* Récupération de l'objet Darwin sur le Réseau */
-			Registry registre = LocateRegistry.getRegistry(ipAdress, Integer.parseInt(Maitre.PORT));
+			Registry registre = LocateRegistry.getRegistry(ipAdress);
 			IDarwin darwin = (IDarwin) registre.lookup(cheminServeur);
 			
 			/* Modification de l'objet */
@@ -65,8 +66,8 @@ public class Requete implements IRequete{
 			/* Lancement de la résolution */
 			IPopulation p = darwin.solve();
 			
-			System.out.println("Le "+cheminServeur+" a terminé le traitement de se requête " +
-					"avec pour meilleur évaluation : " +p.evaluerIndividu(p.getBestIndividu()));
+			long tempsTotal = System.currentTimeMillis() - tempsDepart; 
+			System.out.println(""+cheminServeur+";" +p.evaluerIndividu(p.getBestIndividu()) + ";"+tempsTotal);
 			maitre.recupererIndividu(p.getBestIndividu());
 			
 		} catch (MalformedURLException e) {

@@ -32,7 +32,6 @@ public class RegistreServeur {
 		try {
 			serveurs = new ListeServeur();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -41,19 +40,15 @@ public class RegistreServeur {
 		
 		try {
 			/* On crée un registre sur le réseau */
-			Registry registre;
-			registre = LocateRegistry.createRegistry(Integer.parseInt(Maitre.PORT));
+			LocateRegistry.createRegistry(Integer.parseInt(Maitre.PORT));
 			
 			/* Ajout de l'objet liste des serveurs sur le réseau */
 			Naming.rebind(Maitre.CHEMIN_RESEAU_REGISTRE_SERVEURS, serveurs);
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

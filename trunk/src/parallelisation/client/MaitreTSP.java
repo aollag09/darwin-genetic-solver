@@ -65,10 +65,10 @@ public class MaitreTSP extends Maitre {
 		try {
 			for(String chemin : listServeurs.getServeurs()){
 				try{
-				PopulationTSP population = new PopulationTSP(100, environnement);
-				SelectionNaturelleTSP stsp = new SelectionNaturelleTSP(new SelectionTournoi(70), 
-						new SelectionRoulette(100), new CrossOverChemin(0.8), new MutationChemin(0.7),population,10,1);
-				IConditionArret condition = new ConditionArretEpsilonAvecMarge(0.01, 500);
+				PopulationTSP population = new PopulationTSP(1000, environnement);
+				SelectionNaturelleTSP stsp = new SelectionNaturelleTSP(new SelectionTournoi(700), 
+						new SelectionElitiste(population.getTailleSouhaitee()), new CrossOverChemin(0.8), new MutationChemin(0.7),population,50,0.5);
+				IConditionArret condition = new ConditionArretEpsilonAvecMarge(0.01, 20);
 				Requete r = new Requete( this, stsp, condition, chemin);
 				System.out.println("Population pour "+chemin+" intialisée");
 				this.listRequetes.add(r);

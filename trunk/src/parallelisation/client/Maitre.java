@@ -22,7 +22,7 @@ public abstract class Maitre implements IMaitre {
 	// CONSTANTES :
 	
 	
-	public static String ADRESSE_IP = "localhost";
+	public static String ADRESSE_IP = "172.17.2.13";
 	public static String PORT = "1099";
 	public static String CHEMIN_RESEAU = "rmi//"+ADRESSE_IP+":"+PORT+"//Serveur";
 	public static String CHEMIN_RESEAU_REGISTRE = "rmi//"+ADRESSE_IP;
@@ -73,7 +73,7 @@ public abstract class Maitre implements IMaitre {
 			@Override
 			public boolean isSatisfied() {
 				try {
-					return bestIndividus.getTailleSouhaitee() == listServeurs.size();
+					return bestIndividus.getTailleEffective() == listServeurs.size();
 				} catch (RemoteException e) {
 					e.printStackTrace();
 					return false;
@@ -92,6 +92,10 @@ public abstract class Maitre implements IMaitre {
 	 */
 	public void recupererIndividu(IIndividu ind){
 		this.bestIndividus.ajouterIndividu(ind);
+		System.out.println("La taille des meilleurs individus récupérés est de :"+this.bestIndividus.getTailleEffective());
+		if (conditonArret.isSatisfied()) {
+			this.operationFinale();
+		}
 	}
 
 

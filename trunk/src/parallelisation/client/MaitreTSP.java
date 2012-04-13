@@ -2,6 +2,9 @@ package parallelisation.client;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.util.ArrayList;
+
+import tp.TP;
 
 import modele.genetique.tsp.EnvironnementTSP;
 import modele.genetique.tsp.PopulationTSP;
@@ -27,22 +30,31 @@ import darwin.solveur.selections.SelectionTournoi;
  *
  */
 public class MaitreTSP extends Maitre {
-	
+
 	private static final long serialVersionUID = -2672256610096662180L;
-
-
-	public static void main(String[] args) {
-		MaitreTSP m = new MaitreTSP();
-		m.initialiserRequetes();
-		m.lancerRequetes();
-	}
 	
+	/** Le TP auquel appartient le Maitre */
+	private TP tp;
 
-	public MaitreTSP() {
-		super();
+
+	public MaitreTSP(TP currentTP) {
+		super(); 
+		setTp(currentTP);
 		try {	
 			this.bestIndividus = new PopulationTSP();
-			
+
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+
+
+	public MaitreTSP(int ns, TP currentTP) {
+		super(ns); 
+		setTp(currentTP);
+		try {	
+			this.bestIndividus = new PopulationTSP();
+
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -52,26 +64,26 @@ public class MaitreTSP extends Maitre {
 
 	@Override
 	public void operationFinale() {
-		System.out.println(" OPERATION FINALE ");
-		System.out.println(this.bestIndividus.getBestIndividu());
+		tp.nextExp();
 	}
 
+	
 
 	@Override
 	public void initialiserRequetes() {
+		System.out.println();
 		/* On crée d'abord l'environement toujours indentique */
 		EnvironnementTSP environnement = new EnvironnementTSP();
 		/* Pour chacun des serveurs, on envoie une requête */
 		try {
 			for(String chemin : listServeurs.getServeurs()){
 				try{
-				PopulationTSP population = new PopulationTSP(1000, environnement);
-				SelectionNaturelleTSP stsp = new SelectionNaturelleTSP(new SelectionTournoi(700), 
-						new SelectionElitiste(population.getTailleSouhaitee()), new CrossOverChemin(0.8), new MutationChemin(0.7),population,50,0.5);
-				IConditionArret condition = new ConditionArretEpsilonAvecMarge(0.01, 20);
-				Requete r = new Requete( this, stsp, condition, chemin);
-				System.out.println("Population pour "+chemin+" intialisée");
-				this.listRequetes.add(r);
+					PopulationTSP population = new PopulationTSP(100, environnement,0.015);
+					SelectionNaturelleTSP stsp = new SelectionNaturelleTSP(new SelectionTournoi(70), 
+							new SelectionElitiste(population.getTailleSouhaitee()), new CrossOverChemin(0.8), new MutationChemin(0.7),population,50,0.5);
+					IConditionArret condition = new ConditionArretEpsilonAvecMarge(0.01, 20);
+					Requete r = new Requete( this, stsp, condition, chemin);
+					this.listRequetes.add(r);
 				}
 				catch (Exception e) {
 					e.printStackTrace();
@@ -80,17 +92,16 @@ public class MaitreTSP extends Maitre {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
-	
-	
+
+
 	public String toString(){
 		String toReturn = "";
 		try {
 			java.rmi.registry.LocateRegistry.createRegistry(1108);
 		} catch (RemoteException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		java.rmi.registry.Registry r;
@@ -106,6 +117,24 @@ public class MaitreTSP extends Maitre {
 		}
 		return toReturn;
 	}
-	
+
+
+
+	public TP getTp() {
+		return tp;
+	}
+
+
+
+	public void setTp(TP tp) {
+		this.tp = tp;
+	}
+
+
+	@Override
+	public void ajouterResultatExperience(double d, long tempsTotal) {
+		tp.getTodoList().get(0).ajouterResultat(d, tempsTotal);
+	}
+
 
 }

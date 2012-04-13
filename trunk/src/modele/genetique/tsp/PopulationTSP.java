@@ -29,12 +29,9 @@ public class PopulationTSP extends Population {
 
 	public static void main(String[] args) throws RemoteException {
 		EnvironnementTSP e = new EnvironnementTSP();
-		PopulationTSP p = new PopulationTSP(10, e);
-		PopulationTSPFactory factory = new PopulationTSPFactory(e);
-		ArrayList<IIndividu> ii = (factory.genererPopulationSimilitudeRestrainte(0.1, 20));
-
-		for(IIndividu ivi : ii)
-			System.out.println(ivi);
+		System.out.println("Création...");
+		PopulationTSP p = new PopulationTSP(150, e, 0.015);
+		System.out.println("Terminée");
 	}
 
 	public PopulationTSP() throws RemoteException {
@@ -55,6 +52,15 @@ public class PopulationTSP extends Population {
 		this.environnement = environnement;
 		this.individus = new ArrayList<IIndividu>();
 		generer();
+	}
+	
+	public PopulationTSP(int nombreIndividus, IEnvironnement environnement, double pourcentageSimilitude){
+		super();
+		this.nombreIndividusSouhaite = nombreIndividus;
+		this.environnement = environnement;
+		this.individus = new ArrayList<IIndividu>();
+		PopulationTSPFactory f = new PopulationTSPFactory(getEnvironnement());
+		f.genererPopulationSimilitudeRestrainte(pourcentageSimilitude, nombreIndividus);
 	}
 
 

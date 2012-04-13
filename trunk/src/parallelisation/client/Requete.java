@@ -54,7 +54,7 @@ public class Requete implements IRequete{
 			String[] infos = cheminServeur.split("//");
 			String ipAdress = infos[1];
 			String ServeurName = infos[2];
-			System.out.println(cheminServeur+" : Lancement de la requête...");
+			//System.out.println(cheminServeur+" : Lancement de la requête...");
 			/* Récupération de l'objet Darwin sur le Réseau */
 			Registry registre = LocateRegistry.getRegistry(ipAdress);
 			IDarwin darwin = (IDarwin) registre.lookup(cheminServeur);
@@ -66,9 +66,11 @@ public class Requete implements IRequete{
 			/* Lancement de la résolution */
 			IPopulation p = darwin.solve();
 			
+			/* Résolution términée */
 			long tempsTotal = System.currentTimeMillis() - tempsDepart; 
-			System.out.println(""+cheminServeur+";" +p.evaluerIndividu(p.getBestIndividu()) + ";"+tempsTotal);
+			maitre.ajouterResultatExperience(-p.evaluerIndividu(p.getBestIndividu()), tempsTotal);
 			maitre.recupererIndividu(p.getBestIndividu());
+			//System.out.println(""+cheminServeur+";" + -p.evaluerIndividu(p.getBestIndividu()) + ";"+tempsTotal);
 			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block

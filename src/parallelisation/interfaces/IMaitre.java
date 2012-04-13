@@ -49,6 +49,8 @@ public interface IMaitre extends Serializable {
 	 * d'arrêt
 	 */
 	void operationFinale();
+
+	void ajouterResultatExperience(double d, long tempsTotal);
 	
 	
 }

@@ -20,8 +20,8 @@ public abstract class Maitre implements IMaitre {
 	private static final long serialVersionUID = 1L;
 
 	// CONSTANTES :
-	
-	
+
+
 	public static String ADRESSE_IP = "172.17.2.13";
 	public static String PORT = "1099";
 	public static String CHEMIN_RESEAU = "rmi//"+ADRESSE_IP+":"+PORT+"//Serveur";
@@ -30,57 +30,108 @@ public abstract class Maitre implements IMaitre {
 	public static String CHEMIN_RESEAU_REGISTRE_SERVEURS = CHEMIN_RESEAU_REGISTRE_WITH_PORT + "//Liste";
 
 	//VARIABLES D'INSTANCES : 
-	
+
 	/** L'ensemble des meilleurs individus récupérés avec les générations sur les serveurs */
 	protected IPopulation bestIndividus;
-	
+
 	/** La liste des chemin réseau de tous les serveurs actuellement lancés */
 	protected IListeServeur listServeurs;
-	
+
 	/** La condition d'arrêt à vérifier */
 	protected IConditionArretMaitre conditonArret;
-	
+
 	/** La liste de toutes les requêtes */
 	protected List<IRequete> listRequetes;
-	
+
 	/** Le registre sur le réseau */
 	protected Registry registre;
-	
-	
-	public Maitre() {
-		
-		try {
-		registre = LocateRegistry.getRegistry(Maitre.ADRESSE_IP,Integer.parseInt(Maitre.PORT));
-		/* On récupère la liste des serveurs sur le registre local */ 
-		listServeurs = (IListeServeur) registre.lookup(Maitre.CHEMIN_RESEAU_REGISTRE_SERVEURS);
-		listRequetes = new ArrayList<IRequete>();
-		conditonArret = new IConditionArretMaitre() {
-			
-			private static final long serialVersionUID = -7705378985512001228L;
 
-			@Override
-			public IEnvironnement nextEnvironnement() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public IConditionArretMaitre nextConditionArret() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public boolean isSatisfied() {
-				try {
-					return bestIndividus.getTailleEffective() == listServeurs.size();
-				} catch (RemoteException e) {
-					e.printStackTrace();
-					return false;
+	/** Le nombre de serveurs que l'ont souhaite appeler */
+	private int nombreServeur;
+
+	/** Nombre de serveurs effectués */
+	private int nombreServeurCourantTermine;
+
+
+	public Maitre() {
+
+		try {
+			registre = LocateRegistry.getRegistry(Maitre.ADRESSE_IP,Integer.parseInt(Maitre.PORT));
+			/* On récupère la liste des serveurs sur le registre local */ 
+			listServeurs = (IListeServeur) registre.lookup(Maitre.CHEMIN_RESEAU_REGISTRE_SERVEURS);
+			nombreServeur = listServeurs.size();
+			listRequetes = new ArrayList<IRequete>();
+			nombreServeurCourantTermine = 0;
+			conditonArret = new IConditionArretMaitre() {
+
+				private static final long serialVersionUID = -7705378985512001228L;
+
+				@Override
+				public IEnvironnement nextEnvironnement() {
+					// TODO Auto-generated method stub
+					return null;
 				}
-			}
-		};
-		
+
+				@Override
+				public IConditionArretMaitre nextConditionArret() {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public boolean isSatisfied() {
+					try {
+						return bestIndividus.getTailleEffective() == listServeurs.size();
+					} catch (RemoteException e) {
+						e.printStackTrace();
+						return false;
+					}
+				}
+			};
+
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * @param nombreServeur, le nombre de serveurs utilisés
+	 */
+	public Maitre(int nombreServeur) {
+
+		try {
+			registre = LocateRegistry.getRegistry(Maitre.ADRESSE_IP,Integer.parseInt(Maitre.PORT));
+			/* On récupère la liste des serveurs sur le registre local */ 
+			listServeurs = (IListeServeur) registre.lookup(Maitre.CHEMIN_RESEAU_REGISTRE_SERVEURS);
+			this.nombreServeur = nombreServeur;
+			listRequetes = new ArrayList<IRequete>();
+			conditonArret = new IConditionArretMaitre() {
+
+				private static final long serialVersionUID = -7705378985512001228L;
+
+				@Override
+				public IEnvironnement nextEnvironnement() {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public IConditionArretMaitre nextConditionArret() {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public boolean isSatisfied() {
+					try {
+						return bestIndividus.getTailleEffective() == listServeurs.size();
+					} catch (RemoteException e) {
+						e.printStackTrace();
+						return false;
+					}
+				}
+			};
+
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -91,20 +142,19 @@ public abstract class Maitre implements IMaitre {
 	 * @param ind, l'individu à récupérer après traitement de la requête
 	 */
 	public void recupererIndividu(IIndividu ind){
-		this.bestIndividus.ajouterIndividu(ind);
-		System.out.println("La taille des meilleurs individus récupérés est de :"+this.bestIndividus.getTailleEffective());
-		if (conditonArret.isSatisfied()) {
+		this.nombreServeurCourantTermine ++;
+		if(this.nombreServeurCourantTermine >= this.nombreServeur){
 			this.operationFinale();
 		}
 	}
 
 
-	
+
 	@Override
 	public List<IRequete> getListRequete() {
 		return this.listRequetes;
 	}
-	
+
 	@Override
 	public void ajouterRequete(IRequete requete) {
 		this.listRequetes.add(requete);
@@ -114,28 +164,35 @@ public abstract class Maitre implements IMaitre {
 	public IPopulation getBestIndividus() {
 		return this.bestIndividus;
 	}
-	
+
 	@Override
 	public IConditionArretMaitre getConditionArret() {
 		return conditonArret;
 	}
-	
+
 	@Override
 	public void setConditionArret(IConditionArretMaitre condition) {
 		this.conditonArret = condition;
 	}
-	
+
 	@Override
 	public void setBestIndividus(IPopulation newBest) {
 		bestIndividus = newBest;
 	}
-	
+
 	@Override
 	public void lancerRequetes() {
-		for(IRequete r : listRequetes)
-			r.lancerRequete();
+		if(this.nombreServeur > this.listRequetes.size()){
+			System.out.println("Seulement "+this.listRequetes.size()
+						+" disponnibles, impossible de lancer une requête sur "+this.nombreServeur
+						+" serveurs.");
+		}else{
+			for (int i = 0; i < this.nombreServeur; i++) {
+				listRequetes.get(i).lancerRequete();
+			}
+		}
 	}
 
-	
+
 }
 

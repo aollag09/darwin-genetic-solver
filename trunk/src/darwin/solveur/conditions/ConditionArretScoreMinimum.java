@@ -5,7 +5,6 @@ import darwin.interfaces.IEnvironnement;
 import darwin.interfaces.IPopulation;
 import darwin.modele.ConditionArret;
 
-/* A IMPLEMENTER ET PLACER DANS LE PACKAGE CONDITIONS */
 public class ConditionArretScoreMinimum extends ConditionArret{
 
 	private static final long serialVersionUID = -5378753912484344516L;

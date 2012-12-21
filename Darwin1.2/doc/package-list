@@ -1,0 +1,8 @@
+darwin.interfaces
+darwin.modele
+darwin.solveur
+darwin.solveur.conditions
+darwin.solveur.crossovers
+darwin.solveur.mutations
+darwin.solveur.selections
+tuples
